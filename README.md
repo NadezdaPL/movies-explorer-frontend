@@ -22,13 +22,12 @@
 ## Проект можно запустить с помощью команд:
 
 `npm run start` — запускает сервер  
-`npm run dev` — запускает сервер с hot-reload  
-`npm run lint` — запускает проверку кода  
+`npm run build` — запускает сборку проекта  
             
 ## Ссылки на проект
 
 IP 158.160.38.71  
 Frontend https://diploma-project.nomoredomains.rocks  
 Backend https://api.diploma-project.nomoredomains.rocks  
-Адрес репозитория: https://github.com/NadezdaPL/movies-explorer-api  
+Адрес репозитория: https://github.com/NadezdaPL/movies-explorer-frontend  
 [Макет в Фигме](https://disk.yandex.ru/d/Az9utHCZJqRpug)
