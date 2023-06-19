@@ -1,0 +1,20 @@
+@import url('./vendor/normalize.css');
+@import url('./vendor/fonts/fonts.css');
+
+#root {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: #202020;
+  color: #fff;
+  font-style: normal;
+  font-weight: 400;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}
