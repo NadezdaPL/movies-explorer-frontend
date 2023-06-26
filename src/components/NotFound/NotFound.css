@@ -20,18 +20,21 @@
   margin: 0;
 }
 
-.not-found__link {
+.not-found__button {
   text-decoration: none;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   color: #4285f4;
-  padding-top: 184px;
-  transition: opacity 0.7s;
+  margin-top: 184px;
+  transition: opacity 0.8s;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
-.not-found__link:hover {
-  opacity: 0.7;
+.not-found__button:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 850px) {
@@ -60,9 +63,9 @@
     line-height: 15px;
   }
 
-  .not-found__link {
+  .not-found__button {
     font-size: 12px;
     line-height: 15px;
-    padding-top: 284px;
+    margin-top: 284px;
   }
 }

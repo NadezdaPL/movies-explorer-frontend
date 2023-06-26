@@ -5,8 +5,10 @@ function MoviesCard({ movie }) {
   return (
     <div className='card'>
       <div className='card__context'>
-        <h2 className='card__title'>{movie.nameRU}</h2>
-        <p className='card__duration'>{movie.duration}</p>
+        <div className='card__container'>
+          <h2 className='card__title'>{movie.nameRU}</h2>
+          <p className='card__duration'>{movie.duration}</p>
+        </div>
         <button
           type='button'
           className={`card__like_button ${
@@ -14,7 +16,14 @@ function MoviesCard({ movie }) {
           }`}
         ></button>
       </div>
-      <img className='card__item' alt={movie.nameRU} src={movie.image} />
+      <a
+        href={movie.trailerLink}
+        target='_blank'
+        rel='noreferrer'
+        className='card__link'
+      >
+        <img className='card__item' alt={movie.nameRU} src={movie.image} />
+      </a>
     </div>
   );
 }

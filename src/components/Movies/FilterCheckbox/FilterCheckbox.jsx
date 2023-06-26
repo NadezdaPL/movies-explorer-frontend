@@ -3,13 +3,9 @@ import './FilterCheckbox.css';
 
 function FilterCheckbox() {
   return (
-    <div className='search__ckeckbox_content'>
-      <input
-        className='search__checkbox_content_input'
-        type='checkbox'
-        id='checkbox'
-      />
-      <label className='search__checkbox_content_label' htmlFor='switch' />
+    <div className='filter'>
+      <input className='filter__input' type='checkbox' id='checkbox' />
+      <label className='filter__label' />
     </div>
   );
 }

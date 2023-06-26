@@ -1,10 +1,10 @@
-.search__ckeckbox_content {
+.filter {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.search__checkbox_content_input {
+.filter__input {
   position: relative;
   width: 36px;
   height: 20px;
@@ -15,7 +15,7 @@
   transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-.search__checkbox_content_input::after {
+.filter__input::after {
   content: '';
   position: absolute;
   right: 6px;
@@ -28,11 +28,11 @@
   transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
-.search__checkbox_content_input:checked::after {
+.filter__input:checked::after {
   transform: translateX(calc(50% - 20px));
   background-color: #a0a0a0;
 }
 
-.search__checkbox_content_input:checked {
+.filter__input:checked {
   background-color: #343434;
 }

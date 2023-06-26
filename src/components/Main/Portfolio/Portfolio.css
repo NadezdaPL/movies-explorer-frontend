@@ -14,6 +14,17 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
+  gap: 20px;
+}
+
+.portfolio__container_links {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 19px;
+}
+
+.portfolio__container_links:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 .portfolio__container_link {
@@ -37,14 +48,7 @@
   font-size: 30px;
   line-height: 60px;
   letter-spacing: -0.04em;
-  min-width: 29px;
-}
-
-.portfolio__container_line {
-  border: none;
-  background: #424242;
-  height: 1px;
-  margin: 19px 0 20px;
+  padding: 6px 6px 0;
 }
 
 @media screen and (max-width: 950px) {
@@ -60,7 +64,10 @@
 
   .portfolio__container_image {
     font-size: 28px;
-    min-width: 27px;
+  }
+
+  .portfolio__container_links {
+    border-bottom: 1px solid #e6e6e6;
   }
 }
 
@@ -78,10 +85,7 @@
   .portfolio__container_image {
     font-size: 18px;
     line-height: 28px;
-    min-width: 18px;
-  }
-
-  .portfolio__container_line {
-    background: #e6e6e6;
+    max-width: 10px;
+    padding: 0 5px 0;
   }
 }

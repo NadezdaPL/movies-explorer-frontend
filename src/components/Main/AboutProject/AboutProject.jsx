@@ -5,9 +5,8 @@ function AboutProject() {
   return (
     <section className='project' id='about-project'>
       <h2 className='project__title'>О проекте</h2>
-      <hr className='project__line'></hr>
-      <div className='project__container_content'>
-        <div className='project__container_content_stage'>
+      <div className='project__container'>
+        <div className='project__content'>
           <h3 className='project__content_title'>
             Дипломный проект включал 5 этапов
           </h3>
@@ -16,7 +15,7 @@ function AboutProject() {
             функциональности и финальные доработки.
           </p>
         </div>
-        <div className='project__container_content_week'>
+        <div className='project__content'>
           <h3 className='project__content_title'>
             На выполнение диплома ушло 5 недель
           </h3>
@@ -26,15 +25,14 @@ function AboutProject() {
           </p>
         </div>
       </div>
-      <div className='project__container_week'>
-        <div className='project__container_week_one'>1 неделя</div>
-        <div className='project__container_week_four'>4 недели</div>
+      <div className='project__week'>
+        <p className='project__week_one'>1 неделя</p>
+        <p className='project__week_four'>4 недели</p>
       </div>
-      <div className='project__container_text'>
-        <p className='project__container_text_backend'>Back-end</p>
-        <p className='project__container_text_frontend'>Front-end</p>
+      <div className='project__text'>
+        <p className='project__text_backend'>Back-end</p>
+        <p className='project__text_frontend'>Front-end</p>
       </div>
-      {/* </div> */}
     </section>
   );
 }

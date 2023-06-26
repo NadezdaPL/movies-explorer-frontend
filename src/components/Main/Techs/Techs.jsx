@@ -5,7 +5,6 @@ function Techs() {
   return (
     <section className='techs' id='techs'>
       <h2 className='techs__title'>Технологии</h2>
-      <hr className='techs__line'></hr>
       <div className='techs__container'>
         <h3 className='techs__container_title'>7 технологий</h3>
         <p className='techs__container_text'>
@@ -14,13 +13,29 @@ function Techs() {
         </p>
       </div>
       <div className='techs__stacks'>
-        <span className='techs__stack'>HTML</span>
-        <span className='techs__stack'>CSS</span>
-        <span className='techs__stack'>JS</span>
-        <span className='techs__stack'>React</span>
-        <span className='techs__stack'>Git</span>
-        <span className='techs__stack'>Express.js</span>
-        <span className='techs__stack'>mongoDB</span>
+        <ul className='techs__list'>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>HTML</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>CSS</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>JS</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>React</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>Git</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>Express.js</span>
+          </li>
+          <li className='techs__list_item'>
+            <span className='techs__stacks_stack'>mongoDB</span>
+          </li>
+        </ul>
       </div>
     </section>
   );

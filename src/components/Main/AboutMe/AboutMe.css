@@ -9,19 +9,14 @@
   letter-spacing: -0.04em;
   margin: 0;
   font-style: normal;
-}
-
-.student__line {
-  border: none;
-  background-color: #dadada;
-  height: 1px;
-  margin: 23px 0 66px;
+  padding-bottom: 23px;
+  border-bottom: 1px solid #dadada;
 }
 
 .student__container {
   display: flex;
   justify-content: space-between;
-  padding-bottom: 100px;
+  padding: 66px 0 100px;
 }
 
 .student__container_content {
@@ -30,7 +25,7 @@
   max-width: 600px;
 }
 
-.student__container_content_title {
+.student__container_title {
   font-weight: 400;
   font-size: 50px;
   line-height: 58px;
@@ -38,7 +33,7 @@
   margin: 0;
 }
 
-.student__container_content_profession {
+.student__container_profession {
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
@@ -48,7 +43,7 @@
   padding: 18px 0 26px;
 }
 
-.student__container_content_description {
+.student__container_description {
   font-weight: 400;
   font-size: 14px;
   line-height: 22px;
@@ -57,7 +52,7 @@
   mix-blend-mode: normal;
 }
 
-.student__container_content_github {
+.student__container_github {
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
@@ -67,7 +62,7 @@
   transition: opacity 0.8s;
 }
 
-.student__container_content_github:hover {
+.student__container_github:hover {
   opacity: 0.8;
 }
 
@@ -77,10 +72,11 @@
   max-height: 327px;
 }
 
-.student__container_photo_mine {
+.student__container_mine {
   border-radius: 10px;
-  min-width: 270px;
-  max-height: 327px;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 @media screen and (max-width: 1090px) {
@@ -88,14 +84,14 @@
     max-width: 450px;
   }
 
-  .student__container_content_github {
+  .student__container_github {
     padding-top: 50px;
   }
 }
 
 @media screen and (max-width: 950px) {
   .student {
-    padding: 90px 50px 90px;
+    padding: 90px 50px 93px;
   }
 
   .student__container {
@@ -106,23 +102,23 @@
     max-width: 364px;
   }
 
-  .student__container_content_title {
+  .student__container_title {
     font-size: 40px;
     line-height: 40px;
   }
 
-  .student__container_content_profession {
+  .student__container_profession {
     font-size: 12px;
     line-height: 18px;
     padding: 16px 0 20px;
   }
 
-  .student__container_content_description {
+  .student__container_description {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .student__container_content_github {
+  .student__container_github {
     padding-top: 87px;
   }
 
@@ -131,8 +127,7 @@
     max-height: 307px;
   }
 
-  .student__container_photo_mine {
-    min-width: 255px;
+  .student__container_mine {
     max-height: 307px;
   }
 }
@@ -145,7 +140,7 @@
     gap: 40px;
   }
 
-  .student__container_content_github {
+  .student__container_github {
     padding-top: 40px;
   }
 
@@ -154,47 +149,42 @@
     max-height: 352px;
   }
 
-  .student__container_photo_mine {
-    min-width: 292px;
+  .student__container_mine {
     max-height: 352px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .student {
-    padding: 70px 14px;
+    padding: 70px 14px 69px;
   }
 
   .student__title {
     font-size: 18px;
     line-height: 22px;
-  }
-
-  .student__line {
-    height: 1px;
-    margin: 28px 0 60px;
+    padding-bottom: 28px;
   }
 
   .student__container {
-    padding-bottom: 70px;
+    padding: 60px 0 70px;
   }
 
   .student__container_content {
     max-width: 292px;
   }
 
-  .student__container_content_title {
+  .student__container_title {
     font-size: 30px;
     line-height: 36px;
   }
 
-  .student__container_content_profession {
+  .student__container_profession {
     font-size: 11px;
     line-height: 16px;
     padding: 20px 0;
   }
 
-  .student__container_content_description {
+  .student__container_description {
     font-size: 11px;
     line-height: 16px;
   }

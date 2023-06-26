@@ -13,7 +13,7 @@ function Movies() {
   console.log(setIsLoading);
 
   return (
-    <section className='movies'>
+    <main className='movies'>
       {isLoading ? (
         <Preloader />
       ) : (
@@ -25,7 +25,7 @@ function Movies() {
           <Footer />
         </>
       )}
-    </section>
+    </main>
   );
 }
 

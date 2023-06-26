@@ -3,16 +3,24 @@ import './NavTab.css';
 
 function NavTab() {
   return (
-    <nav className='nav__buttons'>
-      <a href='#about-project' className='nav__button'>
-        О проекте
-      </a>
-      <a href='#techs' className='nav__button'>
-        Технологии
-      </a>
-      <a href='#about-me' className='nav__button'>
-        Студент
-      </a>
+    <nav className='nav-tab__buttons'>
+      <ul className='nav-tab__list'>
+        <li className='nav-tab__item'>
+          <a href='#about-project' className='nav-tab__button'>
+            О проекте
+          </a>
+        </li>
+        <li className='nav-tab__item'>
+          <a href='#techs' className='nav-tab__button'>
+            Технологии
+          </a>
+        </li>
+        <li className='nav-tab__item'>
+          <a href='#about-me' className='nav-tab__button'>
+            Студент
+          </a>
+        </li>
+      </ul>
     </nav>
   );
 }

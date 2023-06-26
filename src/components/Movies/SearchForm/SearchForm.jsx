@@ -3,16 +3,25 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
+  // useState для проверки неактивной кнопки
+  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+
+  console.log(setButtonDisabled);
+
   return (
-    <section className='search'>
-      <form className='search__form'>
+    <div className='search'>
+      <form className='search__form' name='searching'>
         <input
           className='search__form_input'
           type='search'
           placeholder='Фильм'
           required
         />
-        <button type='submit' className='search__form_button'>
+        <button
+          disabled={buttonDisabled ? true : false}
+          type='submit'
+          className='search__form_button'
+        >
           Найти
         </button>
       </form>
@@ -20,8 +29,7 @@ function SearchForm() {
         <FilterCheckbox />
         <span className='search__checkbox_span'>Короткометражки</span>
       </div>
-      <hr className='search__line' />
-    </section>
+    </div>
   );
 }
 

@@ -1,70 +1,14 @@
-.card {
-  min-width: 364px;
-  max-height: 271px;
-  background: #222;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
-}
-
-.card__context {
-  padding: 14px;
-  position: relative;
-}
-
-.card__title {
-  margin: 0;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 18px;
-  padding-bottom: 9px;
-}
-
-.card__duration {
-  margin: 0;
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 13px;
-  color: #8b8b8b;
-}
-
 .card__remove_button {
   border-radius: 36px;
   width: 30px;
   height: 30px;
-  background: #313131 url('../../../images/removeButton.svg') no-repeat center;
-  background-size: 8px 8px;
+  background: url('../../../images/remove.svg');
   border: none;
   cursor: pointer;
   transition: opacity 0.8s;
-  position: absolute;
-  right: 14px;
-  top: 19px;
   padding: 0;
 }
 
 .card__remove_button {
   opacity: 0.8;
-}
-
-@media screen and (max-width: 950px) {
-  .card {
-    min-width: 339px;
-    max-height: 258px;
-  }
-
-  .card__item {
-    min-width: 339px;
-    max-height: 190px;
-  }
-}
-
-@media screen and (max-width: 500px) {
-  .card {
-    min-width: 300px;
-    max-height: 236px;
-  }
-
-  .card__item {
-    min-width: 300px;
-    max-height: 168px;
-  }
 }

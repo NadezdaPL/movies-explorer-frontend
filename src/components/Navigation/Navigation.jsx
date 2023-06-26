@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navigation.css';
 import { NavLink } from 'react-router-dom';
-import accountIcon from '../../images/accountIcon.svg';
+import account from '../../images/account.svg';
 import Drawer from '../Drawer/Drawer';
 
 function Navigation() {
@@ -9,47 +9,47 @@ function Navigation() {
   const [opened, setOpened] = React.useState(false);
 
   return (
-    <div className='navigation'>
-      <nav className='navigation__container'>
-        <div className='navigation__movie-container'>
+    <nav className='navigation'>
+      <ul className='navigation__container'>
+        <li className='navigation__content'>
           <NavLink
-            className='navigation__link navigavion__movies_active'
+            className='navigation__link navigation__link_active'
             to='/movies'
           >
             Фильмы
           </NavLink>
-          <NavLink
-            className='navigation__link navigavion__movies'
-            to='/saved-movies'
-          >
+          <NavLink className='navigation__link' to='/saved-movies'>
             Сохранённые фильмы
           </NavLink>
-        </div>
-        <div className='navigation__account-container'>
+        </li>
+        <li className='navigation__account-container'>
           <NavLink className='navigation__link' to='/profile'>
             Аккаунт
+            <div
+              className='navigation__account_link navigation__link_active'
+            >
+              <img
+                src={account}
+                className='navigation__account_icon'
+                alt='Иконка профиля'
+              />
+            </div>
           </NavLink>
-          <NavLink className='navigation__account-container_link' to='/profile'>
-            <img
-              src={accountIcon}
-              className='navigation__account-container_icon'
-              alt='Иконка профиля'
-            />
-          </NavLink>
-        </div>
-        <div className='navigation__burger-container'>
-          <button
+        </li>
+        <li className='navigation__burger-container'>
+          <div
+            role='button'
             className='navigation__burger_button'
             onClick={() => setOpened(true)}
           >
-            <div className='navigation__burger_button_line' />
-            <div className='navigation__burger_button_line' />
-            <div className='navigation__burger_button_line' />
-          </button>
+            <div className='navigation__burger_line' />
+            <div className='navigation__burger_line' />
+            <div className='navigation__burger_line' />
+          </div>
           {opened && <Drawer onClickClose={() => setOpened(false)} />}
-        </div>
-      </nav>
-    </div>
+        </li>
+      </ul>
+    </nav>
   );
 }
 

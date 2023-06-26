@@ -1,13 +1,19 @@
 .card {
-  min-width: 364px;
-  max-height: 271px;
   background: #222;
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-height: 271px;
+  box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
 }
 
 .card__context {
   padding: 14px;
-  position: relative;
+  display: flex;
+  gap: 26px;
+  align-items: center;
+}
+
+.card__container {
+  min-width: 280px;
 }
 
 .card__title {
@@ -27,16 +33,13 @@
 }
 
 .card__like_button {
-  border-radius: 36px;
+  border-radius: 30px;
   width: 30px;
   height: 30px;
-  background: #313131 url('../../../images/like.svg') no-repeat center;
+  background: #313131 url('../../../images/save.svg') no-repeat center;
   border: none;
   cursor: pointer;
   transition: opacity 0.8s;
-  position: absolute;
-  right: 14px;
-  top: 19px;
 }
 
 .card__like_button:hover {
@@ -47,44 +50,52 @@
   border-radius: 36px;
   width: 30px;
   height: 30px;
-  background: #3ddc84 url('../../../images/likeActive.svg') no-repeat center;
+  background: #3ddc84 url('../../../images/like.svg') no-repeat center;
   border: none;
   cursor: pointer;
   transition: opacity 0.8s;
-  position: absolute;
-  right: 14px;
-  top: 19px;
 }
 
 .card__like_button_active:hover {
   opacity: 0.8;
 }
 
-.card__item {
+.card__link {
   min-width: 364px;
-  max-height: 203px;
+  min-height: 203px;
+  cursor: pointer;
+}
+
+.card__item {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
 }
 
 @media screen and (max-width: 950px) {
   .card {
-    min-width: 339px;
     max-height: 258px;
   }
 
-  .card__item {
-    min-width: 339px;
-    max-height: 190px;
+  .card__context {
+    gap: 31px;
+  }
+
+  .card__container {
+    min-width: 250px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .card {
-    min-width: 300px;
     max-height: 236px;
   }
 
-  .card__item {
-    min-width: 300px;
-    max-height: 168px;
+  .card__context {
+    gap: 32px;
+  }
+
+  .card__container {
+    min-width: 210px;
   }
 }
