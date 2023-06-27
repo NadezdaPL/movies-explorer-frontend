@@ -30,7 +30,7 @@
   visibility: visible;
 }
 
-.button__remove {
+.drawer__remove {
   background: url('../../images/close.svg') no-repeat center;
   width: 22px;
   height: 22px;
@@ -43,7 +43,7 @@
   padding: 0;
 }
 
-.button__remove:hover {
+.drawer__remove:hover {
   opacity: 0.8;
 }
 
@@ -57,6 +57,7 @@
   gap: 22px;
   padding-top: 157px;
   min-width: 340px;
+  margin: 0;
 }
 
 .drawer__link {
@@ -77,12 +78,12 @@
   border-bottom: 2px solid #fff;
 }
 
-.drawer__account_text {
+.drawer__text-account {
   margin: 0;
   padding: 9.5px 0 9.5px 11px;
 }
 
-.drawer__account-container {
+.drawer__account {
   border: none;
   display: flex;
   margin-bottom: 90px;
@@ -90,7 +91,7 @@
   padding: 0;
 }
 
-.drawer__account_link {
+.drawer__link-account {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,11 +107,11 @@
   text-decoration: none;
 }
 
-.drawer__account_link:hover {
+.drawer__link-account:hover {
   opacity: 0.7;
 }
 
-.drawer__account_item {
+.drawer__item-account {
   border-radius: 50px;
   min-width: 26px;
   min-height: 26px;
@@ -123,7 +124,7 @@
 }
 
 @media screen and (max-width: 520px) {
-  .button__remove {
+  .drawer__remove {
     right: 19px;
     top: 18px;
   }
@@ -139,11 +140,11 @@
     padding-bottom: 7px;
   }
 
-  .drawer__account-container {
-    margin-bottom: 46px;
+  .drawer__account {
+    margin-bottom: 47px;
   }
 
-  .drawer__account_link {
+  .drawer__link-account {
     border-radius: 40px;
     background: #202020;
     box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);

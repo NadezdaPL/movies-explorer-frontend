@@ -14,15 +14,11 @@
 
 .project__container {
   display: flex;
-  gap: 40px;
+  gap: 52px;
   padding-top: 70px;
 }
 
-.project__content {
-  min-width: 550px;
-}
-
-.project__content_title {
+.project__title-content {
   margin: 0;
   font-weight: 400;
   font-size: 20px;
@@ -31,7 +27,7 @@
   padding-bottom: 26px;
 }
 
-.project__content_text {
+.project__text-content {
   margin: 0;
   font-weight: 400;
   font-size: 14px;
@@ -44,7 +40,7 @@
   min-height: 36px;
 }
 
-.project__week_one {
+.project__one-week {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +53,7 @@
   margin: 0;
 }
 
-.project__week_four {
+.project__four-week {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,7 +74,7 @@
   line-height: 17px;
 }
 
-.project__text_backend {
+.project__backend-text {
   margin: 0;
   width: 20%;
   display: flex;
@@ -86,7 +82,7 @@
   align-items: center;
 }
 
-.project__text_frontend {
+.project__frontend-text {
   margin: 0;
   width: 80%;
   display: flex;
@@ -100,18 +96,14 @@
   }
 
   .project__container {
-    gap: 30px;
+    gap: 36px;
   }
 
-  .project__content {
-    min-width: 319px;
-  }
-
-  .project__content_title {
+  .project__title-content {
     padding-bottom: 22px;
   }
 
-  .project__content_text {
+  .project__text-content {
     font-size: 12px;
     line-height: 18px;
   }
@@ -125,19 +117,19 @@
     font-weight: 400;
   }
 
-  .project__week_one {
+  .project__one-week {
     width: 21%;
   }
 
-  .project__week_four {
+  .project__four-week {
     width: 79%;
   }
 
-  .project__text_backend {
+  .project__backend-text {
     width: 21%;
   }
 
-  .project__text_frontend {
+  .project__frontend-text {
     width: 79%;
   }
 }
@@ -150,27 +142,23 @@
   .project__title {
     font-size: 18px;
     line-height: 22px;
-    padding-bottom: 28px;
+    padding-bottom: 29px;
   }
 
   .project__container {
     display: flex;
     flex-direction: column;
-    gap: 56px;
+    gap: 57px;
     padding-top: 60px;
   }
 
-  .project__content {
-    min-width: 284px;
-  }
-
-  .project__content_title {
+  .project__title-content {
     font-size: 18px;
     line-height: 22px;
-    padding-bottom: 16px;
+    padding-bottom: 15px;
   }
 
-  .project__content_text {
+  .project__text-content {
     font-size: 11px;
     line-height: 16px;
   }
@@ -180,13 +168,13 @@
     min-height: 35px;
   }
 
-  .project__week_one {
+  .project__one-week {
     width: 35%;
     font-size: 11px;
     line-height: 13px;
   }
 
-  .project__week_four {
+  .project__four-week {
     width: 65%;
     font-size: 11px;
     line-height: 13px;
@@ -197,11 +185,11 @@
     line-height: 13px;
   }
 
-  .project__text_backend {
+  .project__backend-text {
     width: 35%;
   }
 
-  .project__text_frontend {
+  .project__frontend-text {
     width: 65%;
   }
 }

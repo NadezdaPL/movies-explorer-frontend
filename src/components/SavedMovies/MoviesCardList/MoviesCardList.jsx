@@ -21,13 +21,13 @@ function MoviesCardList({ movies }) {
       <ul className='cardlist__list'>
         {width >= 500
           ? movies.slice(0, 3).map((movie) => (
-              <li key={movie.movieId} className='cardlist__list_item'>
+              <li key={movie.movieId} className='cardlist__item-list'>
                 <MoviesCard movie={movie} />
               </li>
             ))
           : width <= 500
           ? movies.slice(0, 2).map((movie) => (
-              <li key={movie.movieId} className='cardlist__list_item'>
+              <li key={movie.movieId} className='cardlist__item-list'>
                 <MoviesCard movie={movie} />
               </li>
             ))

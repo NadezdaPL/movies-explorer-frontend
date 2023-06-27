@@ -11,8 +11,8 @@ function MoviesCard({ movie }) {
         </div>
         <button
           type='button'
-          className={`card__like_button ${
-            movie.isActive ? 'card__like_button_active' : ''
+          className={`card__like-button ${
+            movie.isActive ? 'card__like-button_active' : ''
           }`}
         ></button>
       </div>

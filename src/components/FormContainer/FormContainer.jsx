@@ -37,7 +37,7 @@ function FormContainer({ title, name, onSubmit, buttonText, ...props }) {
           <button
             type='button'
             onClick={() => navigate('/signin')}
-            className='form-container__box_button'
+            className='form-container__button-box'
           >
             Войти
           </button>
@@ -48,7 +48,7 @@ function FormContainer({ title, name, onSubmit, buttonText, ...props }) {
           <button
             type='button'
             onClick={() => navigate('/signup')}
-            className='form-container__box_button'
+            className='form-container__button-box'
           >
             Регистрация
           </button>

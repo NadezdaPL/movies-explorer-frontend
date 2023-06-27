@@ -8,46 +8,46 @@ function Portfolio() {
     <div className='portfolio'>
       <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__container'>
-        <li className='portfolio__container_links'>
+        <li className='portfolio__links-container'>
           <Link
-            className='portfolio__container_link'
+            className='portfolio__link-container'
             href='https://nadezdapl.github.io/how-to-learn/'
             target='_blank'
             rel='noreferrer'
           >
             Статичный сайт
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на статичный сайт'
             />
           </Link>
         </li>
-        <li className='portfolio__container_links'>
+        <li className='portfolio__links-container'>
           <Link
-            className='portfolio__container_link'
+            className='portfolio__link-container'
             to='https://nadezdapl.github.io/russian-travel/'
             target='_blank'
             rel='noreferrer'
           >
             Адаптивный сайт
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на адаптивный сайт'
             />
           </Link>
         </li>
-        <li className='portfolio__container_links'>
+        <li className='portfolio__links-container'>
           <Link
-            className='portfolio__container_link'
+            className='portfolio__link-container'
             to='https://project-mesto.nomoredomains.monster'
             target='_blank'
             rel='noreferrer'
           >
             Одностраничное приложение
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на одностраничное приложение'
             />

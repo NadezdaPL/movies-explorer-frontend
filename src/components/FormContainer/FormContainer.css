@@ -1,7 +1,7 @@
 .form-container {
   padding: 70px 0;
   margin: 0 auto;
-  min-width: 396px;
+  max-width: 396px;
   display: flex;
   flex-direction: column;
 }
@@ -74,7 +74,7 @@
   color: #8b8b8b;
 }
 
-.form-container__box_button {
+.form-container__button-box {
   padding: 0;
   padding-left: 6px;
   text-decoration: none;
@@ -89,7 +89,7 @@
   cursor: pointer;
 }
 
-.form-container__box_button:hover {
+.form-container__button-box:hover {
   opacity: 0.8;
 }
 
@@ -175,7 +175,7 @@
 @media screen and (max-width: 500px) {
   .form-container {
     padding: 56px 0 30px;
-    min-width: 260px;
+    max-width: 260px;
     align-items: center;
   }
 
@@ -206,7 +206,7 @@
     line-height: 15px;
   }
 
-  .form-container__box_button {
+  .form-container__button-box {
     padding-left: 7px;
     font-size: 12px;
     line-height: 15px;

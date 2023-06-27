@@ -1,12 +1,16 @@
+.navigation {
+  display: flex;
+  gap: 363px;
+}
+
 .navigation__container {
   display: flex;
-  gap: 365px;
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
 
-.navigation__burger_button {
+.navigation__button-burger {
   background-color: transparent;
   border: none;
   display: flex;
@@ -19,11 +23,11 @@
   transition: opacity 0.8s ease-in-out;
 }
 
-.navigation__burger_button:hover {
+.navigation__button-burger:hover {
   opacity: 0.8;
 }
 
-.navigation__burger_line {
+.navigation__line-burger {
   min-width: 28px;
   margin-right: 8px;
   border-top: 3px solid #fff;
@@ -33,18 +37,18 @@
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.navigation__burger_line:last-of-type {
+.navigation__line-burger:last-of-type {
   padding: 0;
 }
 
-.navigation__burger-container {
+.navigation__burger {
   display: none;
 }
 
 .navigation__content {
   display: flex;
   justify-content: center;
-  gap: 16px;
+  gap: 17px;
 }
 
 .navigation__link {
@@ -66,17 +70,17 @@
   gap: 9px;
 }
 
-.navigation__account-container {
+.navigation__account {
   display: flex;
   padding-left: 11px;
   padding-right: 3px;
 }
 
-.navigation__link_active {
+.navigation__active-link {
   font-weight: 500;
 }
 
-.navigation__account_link {
+.navigation__link-account {
   display: flex;
   width: 26px;
   height: 26px;
@@ -87,39 +91,39 @@
   transition: opacity 0.7s;
 }
 
-.navigation__account_link:hover {
+.navigation__link-account:hover {
   opacity: 0.7;
 }
 
-.navigation__account_icon {
+.navigation__icon-account {
   padding: 5px;
 }
 
 @media screen and (max-width: 1100px) {
-  .navigation__container {
+  .navigation {
     gap: 270px;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .navigation__container {
+  .navigation {
     gap: 180px;
   }
 }
 
-@media screen and (max-width: 790px) {
-  .navigation__container {
+@media screen and (max-width: 810px) {
+  .navigation {
     gap: 0;
   }
 
   .navigation__content {
     display: none;
   }
-  .navigation__account-container {
+  .navigation__account {
     display: none;
   }
 
-  .navigation__burger-container {
+  .navigation__burger {
     display: block;
     display: flex;
   }
@@ -129,13 +133,13 @@
     font-weight: 500;
   }
 
-  .navigation__link_active {
+  .navigation__link-account {
     border-top: 2px solid #fff;
   }
 }
 
 @media screen and (max-width: 340px) {
-  .navigation__burger_line {
+  .navigation__line-burger {
     min-width: 22px;
     border-top: 2.5px solid #fff;
     padding-bottom: 6.5px;

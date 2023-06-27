@@ -21,7 +21,7 @@
   padding: 90px 0 100px;
 }
 
-.techs__container_title {
+.techs__title-container {
   margin: 0;
   padding-bottom: 26px;
   font-weight: 400;
@@ -31,7 +31,7 @@
   letter-spacing: -0.04em;
 }
 
-.techs__container_text {
+.techs__text-container {
   margin: 0;
   font-weight: 400;
   font-size: 14px;
@@ -50,7 +50,7 @@
   gap: 10px;
 }
 
-.techs__list_item {
+.techs__item-list {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -77,20 +77,16 @@
     padding: 80px 0 83px;
   }
 
-  .techs__container_title {
+  .techs__title-container {
     padding-bottom: 22px;
   }
 
-  .techs__container_text {
+  .techs__text-container {
     font-size: 12px;
     line-height: 18px;
   }
 
-  .techs__stacks {
-    padding: 0 60px;
-  }
-
-  .techs__list_item {
+  .techs__item-list {
     font-size: 12px;
     line-height: 15px;
     min-width: 84px;
@@ -123,13 +119,13 @@
     padding: 60px 0 50px;
   }
 
-  .techs__container_title {
+  .techs__title-container {
     padding-bottom: 24px;
     font-size: 30px;
     line-height: 36px;
   }
 
-  .techs__container_text {
+  .techs__text-container {
     font-size: 11px;
     line-height: 16px;
     max-width: 292px;

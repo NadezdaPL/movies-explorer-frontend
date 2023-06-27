@@ -12,7 +12,7 @@ function Footer() {
         <p className='footer__year'>&#169; {new Date().getFullYear()}</p>
         <nav className='footer__list'>
           <ul className='footer__links'>
-            <li className='footer__links_item'>
+            <li className='footer__item-links'>
               <Link
                 href='https://practicum.yandex.ru/'
                 className='footer__link'
@@ -22,7 +22,7 @@ function Footer() {
                 Яндекс.Практикум
               </Link>
             </li>
-            <li className='footer__links_item'>
+            <li className='footer__item-links'>
               <Link
                 href='https://github.com/NadezdaPL'
                 className='footer__link'

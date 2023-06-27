@@ -23,50 +23,51 @@ function Profile() {
     <>
       <Header />
       <main className='profile'>
-        <h1 className='profile__title'>Привет, Надежда!</h1>
-        <form className='profile__form' onSubmit={submitForm} name='account'>
-          <fieldset className='profile__form_fieldset'>
-            <label className='profile__name' htmlFor='name'>
-              Имя
-            </label>
-            <input
-              className={`profile__input ${
-                error.name ? 'profile__user_error' : ''
-              }`}
-              name='name'
-              type='text'
-              minLength='2'
-              maxLength='40'
-              id='name'
-              required
-              placeholder='Надежда'
-              onChange={handleChange}
-              value={values.name || ''}
-              disabled={edit ? false : true}
-            />
-          </fieldset>
-          <fieldset className='profile__form_fieldset'>
-            <label className='profile__name' htmlFor='email'>
-              E-mail
-            </label>
-            <input
-              className={`profile__input ${
-                error.name ? 'profile__user_error' : ''
-              }`}
-              name='email'
-              type='email'
-              minLength='6'
-              maxLength='40'
-              id='email'
-              required
-              placeholder='pochta@yandex.ru'
-              onChange={handleChange}
-              value={values.email || ''}
-              disabled={edit ? false : true}
-            />
-          </fieldset>
-          {/* ниже код для проверки вывода сообщения */}
-          {/* {!valid ? (
+        <section className='profile__section'>
+          <h1 className='profile__title'>Привет, Надежда!</h1>
+          <form className='profile__form' onSubmit={submitForm} name='account'>
+            <fieldset className='profile__fieldset profile__fieldset_form'>
+              <label className='profile__name' htmlFor='name'>
+                Имя
+              </label>
+              <input
+                className={`profile__input ${
+                  error.name ? 'profile__user_error' : ''
+                }`}
+                name='name'
+                type='text'
+                minLength='2'
+                maxLength='40'
+                id='name'
+                required
+                placeholder='Надежда'
+                onChange={handleChange}
+                value={values.name || ''}
+                disabled={edit ? false : true}
+              />
+            </fieldset>
+            <fieldset className='profile__fieldset profile__fieldset_form'>
+              <label className='profile__name' htmlFor='email'>
+                E-mail
+              </label>
+              <input
+                className={`profile__input ${
+                  error.name ? 'profile__user_error' : ''
+                }`}
+                name='email'
+                type='email'
+                minLength='6'
+                maxLength='40'
+                id='email'
+                required
+                placeholder='pochta@yandex.ru'
+                onChange={handleChange}
+                value={values.email || ''}
+                disabled={edit ? false : true}
+              />
+            </fieldset>
+            {/* ниже код для проверки вывода сообщения */}
+            {/* {!valid ? (
             <>
               {edit ? (
                 <span id='name-error' className='profile__error_active'>
@@ -79,36 +80,37 @@ function Profile() {
           ) : (
             ''
           )} */}
-          {edit && (
-            <button
-              className='profile__form_save'
-              type='submit'
-              disabled={valid ? false : true}
-            >
-              Сохранить
-            </button>
+            {edit && (
+              <button
+                className='profile__save-form'
+                type='submit'
+                disabled={valid ? false : true}
+              >
+                Сохранить
+              </button>
+            )}
+          </form>
+          {edit ? (
+            ''
+          ) : (
+            <>
+              <button
+                className='profile__edit-form'
+                type='button'
+                onClick={handleEdit}
+              >
+                Редактировать
+              </button>
+              <button
+                type='button'
+                className='profile__exit-form'
+                onClick={() => navigate('/')}
+              >
+                Выйти из аккаунта
+              </button>
+            </>
           )}
-        </form>
-        {edit ? (
-          ''
-        ) : (
-          <>
-            <button
-              className='profile__form_edit'
-              type='button'
-              onClick={handleEdit}
-            >
-              Редактировать
-            </button>
-            <button
-              type='button'
-              className='profile__form_exit'
-              onClick={() => navigate('/')}
-            >
-              Выйти из аккаунта
-            </button>
-          </>
-        )}
+        </section>
       </main>
     </>
   );

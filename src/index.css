@@ -1,23 +1,2 @@
 @import url('./vendor/normalize.css');
 @import url('./vendor/fonts/fonts.css');
-
-body {
-  background-color: #202020;
-}
-
-#root {
-  font-family: 'Inter', Arial, sans-serif;
-  color: #fff;
-  font-style: normal;
-  font-weight: 400;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
-}
-/* 
-* {
-  outline: 1px solid red;
-} */

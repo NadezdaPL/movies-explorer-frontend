@@ -6,34 +6,34 @@ function Techs() {
     <section className='techs' id='techs'>
       <h2 className='techs__title'>Технологии</h2>
       <div className='techs__container'>
-        <h3 className='techs__container_title'>7 технологий</h3>
-        <p className='techs__container_text'>
+        <h3 className='techs__title-container'>7 технологий</h3>
+        <p className='techs__text-container'>
           На курсе веб-разработки мы освоили технологии, которые применили в
           дипломном проекте.
         </p>
       </div>
       <div className='techs__stacks'>
         <ul className='techs__list'>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>HTML</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>HTML</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>CSS</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>CSS</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>JS</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>JS</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>React</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>React</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>Git</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>Git</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>Express.js</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>Express.js</span>
           </li>
-          <li className='techs__list_item'>
-            <span className='techs__stacks_stack'>mongoDB</span>
+          <li className='techs__item-list'>
+            <span className='techs__stack-item-list'>mongoDB</span>
           </li>
         </ul>
       </div>

@@ -32,7 +32,7 @@
   color: #8b8b8b;
 }
 
-.card__like_button {
+.card__like-button {
   border-radius: 30px;
   width: 30px;
   height: 30px;
@@ -42,11 +42,26 @@
   transition: opacity 0.8s;
 }
 
-.card__like_button:hover {
+.card__like-button:hover {
   opacity: 0.8;
 }
 
-.card__like_button_active {
+.card__button-remove {
+  border-radius: 36px;
+  width: 30px;
+  height: 30px;
+  background: #313131 url('../../../images/remove.svg');
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.8s;
+}
+
+.card__button-remove:hover {
+  opacity: 0.8;
+}
+
+.card__like-button_active {
   border-radius: 36px;
   width: 30px;
   height: 30px;
@@ -56,7 +71,7 @@
   transition: opacity 0.8s;
 }
 
-.card__like_button_active:hover {
+.card__like-button_active:hover {
   opacity: 0.8;
 }
 
@@ -67,9 +82,10 @@
 }
 
 .card__item {
+  width: 100%;
+  max-height: 203px;
   object-fit: cover;
   object-position: center;
-  width: 100%;
 }
 
 @media screen and (max-width: 950px) {
@@ -84,6 +100,10 @@
   .card__container {
     min-width: 250px;
   }
+
+  .card__item {
+    max-height: 190px;
+  }
 }
 
 @media screen and (max-width: 500px) {
@@ -97,5 +117,9 @@
 
   .card__container {
     min-width: 210px;
+  }
+
+  .card__item {
+    max-height: 168px;
   }
 }

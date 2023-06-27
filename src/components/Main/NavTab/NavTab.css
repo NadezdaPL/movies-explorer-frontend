@@ -1,4 +1,4 @@
-.nav-tab__buttons {
+.nav-tab {
   padding-bottom: 30px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 @media screen and (max-width: 500px) {
-  .nav-tab__buttons {
+  .nav-tab {
     padding-bottom: 17px;
   }
 

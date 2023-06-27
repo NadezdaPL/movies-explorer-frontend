@@ -5,6 +5,12 @@
   padding: 246px 0 60px;
 }
 
+.not-found__section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .not-found__title {
   font-weight: 400;
   font-size: 140px;

@@ -9,10 +9,10 @@ function SearchForm() {
   console.log(setButtonDisabled);
 
   return (
-    <div className='search'>
+    <section className='search'>
       <form className='search__form' name='searching'>
         <input
-          className='search__form_input'
+          className='search__input-form'
           type='search'
           placeholder='Фильм'
           required
@@ -20,16 +20,16 @@ function SearchForm() {
         <button
           disabled={buttonDisabled ? true : false}
           type='submit'
-          className='search__form_button'
+          className='search__button-form'
         >
           Найти
         </button>
       </form>
       <div className='search__checkbox'>
         <FilterCheckbox />
-        <span className='search__checkbox_span'>Короткометражки</span>
+        <span className='search__span-checkbox'>Короткометражки</span>
       </div>
-    </div>
+    </section>
   );
 }
 

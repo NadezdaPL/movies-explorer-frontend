@@ -4,38 +4,51 @@ import { NavLink } from 'react-router-dom';
 import account from '../../images/account.svg';
 
 function Drawer({ onClickClose, opened }) {
+  // для проверки активной ссылки
+  const linkActive = 'drawer__link drawer__link_active';
+  const link = 'drawer__link';
+
   return (
     <div className={`overlay ${opened ? 'visible' : ''}`}>
       <nav className={`drawer ${opened ? 'drawer__active' : ''}`}>
         <button
           type='button'
-          className='button__remove'
+          className='drawer__remove'
           onClick={onClickClose}
         />
         <ul className='drawer__list'>
-          <li className='drawer__list_item'>
-            <NavLink className='drawer__link' to='/'>
+          <li className='drawer__item-list'>
+            <NavLink
+              className={({ isActive }) => (isActive ? linkActive : link)}
+              to='/'
+            >
               Главная
             </NavLink>
           </li>
-          <li className='drawer__list_item'>
-            <NavLink className='drawer__link drawer__link_active' to='/movies'>
+          <li className='drawer__item-list'>
+            <NavLink
+              className={({ isActive }) => (isActive ? linkActive : link)}
+              to='/movies'
+            >
               Фильмы
             </NavLink>
           </li>
-          <li className='drawer__list_item'>
-            <NavLink className='drawer__link' to='/saved-movies'>
+          <li className='drawer__item-list'>
+            <NavLink
+              className={({ isActive }) => (isActive ? linkActive : link)}
+              to='/saved-movies'
+            >
               Сохранённые фильмы
             </NavLink>
           </li>
         </ul>
-        <div className='drawer__account-container'>
-          <NavLink className='drawer__account_link' to='/profile'>
-            <p className='drawer__account_text'>Аккаунт</p>
-            <div className='drawer__account_item'>
+        <div className='drawer__account'>
+          <NavLink className='drawer__link-account' to='/profile'>
+            <p className='drawer__text-account'>Аккаунт</p>
+            <div className='drawer__item-account'>
               <img
                 src={account}
-                className='drawer__account-container_icon'
+                className='drawer__icon-account'
                 alt='Иконка профиля'
               />
             </div>
