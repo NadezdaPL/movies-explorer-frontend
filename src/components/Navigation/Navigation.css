@@ -1,9 +1,16 @@
-.navigation__container {
+.navigation {
   display: flex;
-  gap: 364px;
+  gap: 363px;
 }
 
-.navigation__burger_button {
+.navigation__container {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.navigation__button-burger {
   background-color: transparent;
   border: none;
   display: flex;
@@ -16,12 +23,13 @@
   transition: opacity 0.8s ease-in-out;
 }
 
-.navigation__burger_button:hover {
+.navigation__button-burger:hover {
   opacity: 0.8;
 }
 
-.navigation__burger_button_line {
+.navigation__line-burger {
   min-width: 28px;
+  margin-right: 8px;
   border-top: 3px solid #fff;
   padding-bottom: 7px;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
@@ -29,35 +37,23 @@
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
-.navigation__burger_button_line:last-of-type {
+.navigation__line-burger:last-of-type {
   padding: 0;
 }
 
-@media screen and (max-width: 1100px) {
-  .navigation__container {
-    gap: 270px;
-  }
-}
-
-@media screen and (max-width: 900px) {
-  .navigation__container {
-    gap: 180px;
-  }
-}
-
-.navigation__burger-container {
+.navigation__burger {
   display: none;
 }
 
-.navigation__movie-container {
+.navigation__content {
   display: flex;
-  gap: 16px;
+  justify-content: center;
+  gap: 17px;
 }
 
 .navigation__link {
-  font-weight: 500;
   font-size: 13px;
-  line-height: 12px;
+  line-height: 18px;
   color: #fff;
   text-decoration: none;
   transition: opacity 0.7s;
@@ -70,22 +66,21 @@
   opacity: 0.7;
 }
 
-.navigation__account-container {
+.navigation__link:last-child {
+  gap: 9px;
+}
+
+.navigation__account {
   display: flex;
-  gap: 7px;
-  align-items: center;
+  padding-left: 11px;
+  padding-right: 3px;
 }
 
-.navigavion__movies {
-  font-weight: 400;
-  line-height: 18px;
+.navigation__active-link {
+  font-weight: 500;
 }
 
-.navigavion__movies_active {
-  line-height: 18px;
-}
-
-.navigation__account-container_link {
+.navigation__link-account {
   display: flex;
   width: 26px;
   height: 26px;
@@ -96,32 +91,58 @@
   transition: opacity 0.7s;
 }
 
-.navigation__account-container_link:hover {
+.navigation__link-account:hover {
   opacity: 0.7;
 }
 
-@media screen and (max-width: 768px) {
-  .navigation__container {
-    gap: 0;
-  }
+.navigation__icon-account {
+  padding: 5px;
+}
 
-  .navigation__movie-container {
-    display: none;
-  }
-  .navigation__account-container {
-    display: none;
-  }
-
-  .navigation__burger-container {
-    display: block;
-    display: flex;
+@media screen and (max-width: 1100px) {
+  .navigation {
+    gap: 270px;
   }
 }
 
-@media screen and (max-width: 320px) {
-  .navigation__burger_button_line {
+@media screen and (max-width: 900px) {
+  .navigation {
+    gap: 180px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .navigation {
+    gap: 0;
+  }
+
+  .navigation__content {
+    display: none;
+  }
+  .navigation__account {
+    display: none;
+  }
+
+  .navigation__burger {
+    display: block;
+    display: flex;
+  }
+
+  .navigation__link {
+    font-size: 22px;
+    font-weight: 500;
+  }
+
+  .navigation__link-account {
+    border-top: 2px solid #fff;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .navigation__line-burger {
     min-width: 22px;
     border-top: 2.5px solid #fff;
     padding-bottom: 6.5px;
+    margin-right: 9px;
   }
 }

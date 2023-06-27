@@ -6,33 +6,41 @@
 }
 
 .header__logo {
-  background-image: url('../../images/mainLogo.svg');
+  background-image: url('../../images/logo.svg');
   min-width: 38px;
   min-height: 38px;
+  transition: opacity 0.8s;
 }
 
-.header__nav {
+.header__logo:hover {
+  opacity: 0.8;
+}
+
+.header__box {
   display: flex;
-  gap: 30px;
+  gap: 24px;
 }
 
-.header__link {
+.header__button {
   font-weight: 500;
   font-size: 12px;
   line-height: 16px;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: opacity 0.7s;
+  transition: opacity 0.8s;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }
 
-.header__link:hover {
-  opacity: 0.7;
+.header__button:hover {
+  opacity: 0.8;
 }
 
-.header__link:last-of-type {
+.header__button:last-of-type {
   color: #000;
   background: #3ddc84;
   border-radius: 3px;
@@ -40,7 +48,7 @@
   min-height: 32px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 950px) {
   .header {
     padding-left: 30px;
     padding-right: 30px;
@@ -52,15 +60,15 @@
     padding: 18px 14px 18px;
   }
 
-  .header__nav {
-    gap: 14px;
+  .header__box {
+    gap: 8px;
   }
 
-  .header__link {
+  .header__button {
     font-size: 10px;
   }
 
-  .header__link:last-of-type {
+  .header__button:last-of-type {
     min-width: 54px;
     min-height: 26px;
   }

@@ -17,19 +17,27 @@ function MoviesCardList({ movies }) {
   }, []);
 
   return (
-    <div className='cardlist'>
-      {width <= 500
-        ? movies.slice(0, 5).map((movie) => {
-            return <MoviesCard key={movie.movieId} movie={movie} />;
-          })
-        : width <= 950
-        ? movies.slice(0, 8).map((movie) => {
-            return <MoviesCard key={movie.movieId} movie={movie} />;
-          })
-        : movies.map((movie) => {
-            return <MoviesCard key={movie.movieId} movie={movie} />;
-          })}
-    </div>
+    <section className='cardlist'>
+      <ul className='cardlist__list'>
+        {width <= 500
+          ? movies.slice(0, 5).map((movie) => (
+              <li key={movie.movieId} className='cardlist__item-list'>
+                <MoviesCard movie={movie} />
+              </li>
+            ))
+          : width <= 950
+          ? movies.slice(0, 8).map((movie) => (
+              <li key={movie.movieId} className='cardlist__item-list'>
+                <MoviesCard movie={movie} />
+              </li>
+            ))
+          : movies.map((movie) => (
+              <li key={movie.movieId} className='cardlist__item-list'>
+                <MoviesCard movie={movie} />
+              </li>
+            ))}
+      </ul>
+    </section>
   );
 }
 

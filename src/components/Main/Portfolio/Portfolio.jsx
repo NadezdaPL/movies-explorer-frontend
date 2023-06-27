@@ -1,64 +1,57 @@
 import React from 'react';
 import './Portfolio.css';
 import arrow from '../../../images/arrow.svg';
+import { Link } from 'react-router-dom';
 
 function Portfolio() {
   return (
     <div className='portfolio'>
-      <h3 className='portfolio__title'>Портфолио</h3>
+      <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__container'>
-        <li className='portfolio__container_links'>
-          <div className='portfolio__container_link'>
-            <a
-              href='https://nadezdapl.github.io/how-to-learn/'
-              className='portfolio__container_link'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Статичный сайт
-            </a>
+        <li className='portfolio__links-container'>
+          <Link
+            className='portfolio__link-container'
+            href='https://nadezdapl.github.io/how-to-learn/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Статичный сайт
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на статичный сайт'
             />
-          </div>
-          <hr className='portfolio__container_line' />
+          </Link>
         </li>
-        <li className='portfolio__container_links'>
-          <div className='portfolio__container_link'>
-            <a
-              href='https://nadezdapl.github.io/russian-travel/'
-              className='portfolio__container_link'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Адаптивный сайт
-            </a>
+        <li className='portfolio__links-container'>
+          <Link
+            className='portfolio__link-container'
+            to='https://nadezdapl.github.io/russian-travel/'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Адаптивный сайт
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на адаптивный сайт'
             />
-          </div>
-          <hr className='portfolio__container_line' />
+          </Link>
         </li>
-        <li className='portfolio__container_links'>
-          <div className='portfolio__container_link'>
-            <a
-              href=' https://project-mesto.nomoredomains.monster'
-              className='portfolio__container_link'
-              target='_blank'
-              rel='noreferrer'
-            >
-              Одностраничное приложение
-            </a>
+        <li className='portfolio__links-container'>
+          <Link
+            className='portfolio__link-container'
+            to='https://project-mesto.nomoredomains.monster'
+            target='_blank'
+            rel='noreferrer'
+          >
+            Одностраничное приложение
             <img
-              className='portfolio__container_image'
+              className='portfolio__image-container'
               src={arrow}
               alt='Ссылка на одностраничное приложение'
             />
-          </div>
+          </Link>
         </li>
       </ul>
     </div>

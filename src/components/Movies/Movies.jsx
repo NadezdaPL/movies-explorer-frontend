@@ -13,19 +13,21 @@ function Movies() {
   console.log(setIsLoading);
 
   return (
-    <section className='movies'>
+    <>
       {isLoading ? (
         <Preloader />
       ) : (
         <>
           <Header />
-          <SearchForm />
-          <MoviesCardList movies={items} />
-          <button className='movies__button'>Ещё</button>
+          <main className='movies'>
+            <SearchForm />
+            <MoviesCardList movies={items} />
+            <button className='movies__button'>Ещё</button>
+          </main>
           <Footer />
         </>
       )}
-    </section>
+    </>
   );
 }
 

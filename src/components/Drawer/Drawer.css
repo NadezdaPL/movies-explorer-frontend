@@ -1,4 +1,4 @@
-.drawer_hidden {
+.overlay {
   position: fixed;
   right: 0;
   top: 0;
@@ -7,62 +7,57 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.3s ease-in, visibility 0.8s ease-in-out;
+  justify-content: flex-end;
+  transition: visibility 0.25s linear, opacity 0.25s linear;
 }
 
-.drawer_visible {
+.visible {
   visibility: visible;
+  display: flex;
 }
 
 .drawer {
-  position: absolute;
-  max-width: 520px;
-  height: 100%;
-  right: 0;
-  top: 0;
-  background: #202020;
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding-top: 22px;
-  transition: opacity 0.3s, visibility 0.8s;
+  align-items: center;
+  position: relative;
+  width: 520px;
+  height: 100%;
+  background: #202020;
 }
 
-.drawer_active {
+.drawer__active {
   visibility: visible;
 }
 
-.drawer__button {
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 22px;
-}
-
-.button__remove {
-  background: url('../../images/removeButton.svg') no-repeat center;
+.drawer__remove {
+  background: url('../../images/close.svg') no-repeat center;
   width: 22px;
   height: 22px;
   border: none;
-  transition: opacity 0.8s;
   cursor: pointer;
+  position: absolute;
+  right: 26px;
+  top: 27px;
+  transition: opacity 0.8s linear;
+  padding: 0;
 }
 
-.button__remove:hover {
+.drawer__remove:hover {
   opacity: 0.8;
-  text-decoration: underline;
 }
 
-.drawer__links {
+.drawer__list {
+  list-style-type: none;
+  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 105px 90px 621px;
-  gap: 24px;
+  gap: 22px;
+  padding-top: 157px;
   min-width: 340px;
+  margin: 0;
 }
 
 .drawer__link {
@@ -72,6 +67,7 @@
   color: #fff;
   text-decoration: none;
   transition: opacity 0.7s;
+  padding-bottom: 4px;
 }
 
 .drawer__link:hover {
@@ -79,72 +75,78 @@
 }
 
 .drawer__link_active {
-  border-bottom: 4px solid #fff;
-  margin-bottom: -4px;
+  border-bottom: 2px solid #fff;
 }
 
-.drawer__account-container {
+.drawer__text-account {
+  margin: 0;
+  padding: 9.5px 0 9.5px 11px;
+}
+
+.drawer__account {
+  border: none;
   display: flex;
-  justify-content: center;
+  margin-bottom: 90px;
+  margin-top: auto;
+  padding: 0;
+}
+
+.drawer__link-account {
+  display: flex;
   align-items: center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25),
+    0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
   gap: 7px;
-  padding: 0 210px 90px;
-}
-
-.drawer__account-container_link {
-  display: flex;
-  min-width: 26px;
-  min-height: 26px;
-  background: #313131;
-  border-radius: 50px;
-  justify-content: center;
-  align-items: center;
-  margin: 3px 3px 3px 0;
-}
-
-.drawer__account-link {
+  transition: opacity 0.7s;
   font-weight: 500;
   font-size: 13px;
   line-height: 12px;
   color: #fff;
   text-decoration: none;
-  transition: opacity 0.7s;
 }
 
-.drawer__account-container_icon {
-  transition: opacity 0.7s;
-}
-
-.drawer__account-link:hover,
-.drawer__account-container_icon:hover {
+.drawer__link-account:hover {
   opacity: 0.7;
 }
 
+.drawer__item-account {
+  border-radius: 50px;
+  min-width: 26px;
+  min-height: 26px;
+  background: #313131;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin-right: 3px;
+}
+
 @media screen and (max-width: 520px) {
-  .drawer {
-    padding-top: 13.44px;
-    max-width: 320px;
-    height: 780px;
+  .drawer__remove {
+    right: 19px;
+    top: 18px;
   }
 
-  .drawer__links {
-    padding: 99px 10px 444px;
-    gap: 18px;
+  .drawer__list {
+    padding-top: 145px;
     min-width: 300px;
+    gap: 24px;
   }
 
   .drawer__link {
-    padding-bottom: 7px;
     line-height: 22px;
+    padding-bottom: 7px;
   }
 
-  .drawer__link:hover {
-    opacity: 0.8;
-    border-bottom: 2px solid #fff;
-    margin-bottom: -2px;
+  .drawer__account {
+    margin-bottom: 47px;
   }
 
-  .drawer__account-container {
-    padding: 0 110px 46px;
+  .drawer__link-account {
+    border-radius: 40px;
+    background: #202020;
+    box-shadow: 0px 3px 14px 0px rgba(0, 0, 0, 0.08);
   }
 }

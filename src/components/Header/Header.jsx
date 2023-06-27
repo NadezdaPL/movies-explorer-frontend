@@ -1,11 +1,12 @@
 import React from 'react';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Header() {
   // useState для проверки данных в хедере
   const [loggedIn, setLoggedIn] = React.useState(true);
+  const navigate = useNavigate();
   console.log(setLoggedIn);
 
   return (
@@ -14,14 +15,22 @@ function Header() {
       {loggedIn ? (
         <Navigation />
       ) : (
-        <nav className='header__nav'>
-          <NavLink className='header__link' to='/signup'>
+        <div className='header__box'>
+          <button
+            type='button'
+            className='header__button'
+            onClick={() => navigate('/signup')}
+          >
             Регистрация
-          </NavLink>
-          <NavLink className='header__link' to='/signin'>
+          </button>
+          <button
+            type='button'
+            className='header__button'
+            onClick={() => navigate('/signin')}
+          >
             Войти
-          </NavLink>
-        </nav>
+          </button>
+        </div>
       )}
     </header>
   );

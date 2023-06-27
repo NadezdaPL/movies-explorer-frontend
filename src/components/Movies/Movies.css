@@ -15,7 +15,7 @@
   color: #fff;
   border: none;
   margin: 50px auto 80px;
-  padding: 11px 60px 9px;
+  padding: 11px 60px 15px;
   transition: opacity 0.8s;
 }
 
@@ -25,15 +25,15 @@
 
 @media screen and (max-width: 950px) {
   .movies__button {
-    margin: 51px auto 79px;
-    padding: 10px 60px;
+    margin: 50px auto 83px;
+    padding: 9px 60px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .movies__button {
     width: 240px;
-    margin: 50px auto 80px;
+    margin: 50px auto 79px;
     padding: 11px 20px 9px;
   }
 }

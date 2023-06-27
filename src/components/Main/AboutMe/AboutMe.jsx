@@ -7,14 +7,13 @@ function AboutMe() {
   return (
     <section className='student' id='about-me'>
       <h2 className='student__title'>Студент</h2>
-      <hr className='student__line'></hr>
       <div className='student__container'>
-        <div className='student__container_content'>
-          <h3 className='student__container_content_title'>Надежда</h3>
-          <p className='student__container_content_profession'>
+        <div className='student__content-container'>
+          <h3 className='student__title-container'>Надежда</h3>
+          <p className='student__profession-container'>
             Фронтенд-разработчик, 32 лет
           </p>
-          <p className='student__container_content_description'>
+          <p className='student__description-container'>
             Я родилась и живу в Омске, закончила факультет мировой экономики
             ОмГУПС. Люблю путешествовать, играть в настольные игры, а ещё
             увлекаюсь йогой. Недавно начала кодить. С сентября 2022 года прохожу
@@ -23,19 +22,15 @@ function AboutMe() {
           </p>
           <a
             href='https://github.com/NadezdaPL'
-            className='student__container_content_github'
+            className='student__github-container'
             target='_blank'
             rel='noreferrer'
           >
             Github
           </a>
         </div>
-        <div className='student__container_photo'>
-          <img
-            className='student__container_photo_mine'
-            src={mine}
-            alt='Мое фото'
-          />
+        <div className='student__photo-container'>
+          <img className='student__mine-container' src={mine} alt='Мое фото' />
         </div>
       </div>
       <Portfolio />

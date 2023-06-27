@@ -14,7 +14,7 @@ function SavedMovies() {
   console.log(setIsLoading);
 
   return (
-    <section className='movies'>
+    <main className='movies'>
       {isLoading ? (
         <Preloader />
       ) : (
@@ -26,7 +26,7 @@ function SavedMovies() {
           <Footer />
         </>
       )}
-    </section>
+    </main>
   );
 }
 

@@ -1,8 +1,13 @@
 .profile {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
   padding: 74px 0 70px;
+}
+
+.profile__section {
+  display: flex;
+  flex-direction: column;
 }
 
 .profile__title {
@@ -14,17 +19,27 @@
 }
 
 .profile__form {
-  padding: 123px 0 220px;
-  min-width: 410px;
+  padding: 124px 0 0;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 410px;
 }
 
-.profile__form_name {
+.profile__fieldset_form {
   padding: 0;
   border: none;
   display: flex;
   justify-content: space-between;
   margin: 0;
+  border-bottom: 1px solid #424242;
+  padding-bottom: 17px;
+}
+
+.profile__fieldset_form:last-of-type {
+  padding-bottom: 0;
+  border: none;
+  padding-top: 17px;
 }
 
 .profile__name {
@@ -33,69 +48,40 @@
   line-height: 13px;
 }
 
-.profile__user {
+.profile__input {
   padding: 0;
   border: none;
   text-align: right;
   background: #202020;
-  font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #ffffff;
+  width: 85%;
 }
 
-.profile__user::placeholder {
+.profile__input::placeholder {
   color: #fff;
 }
 
-.profile__form_line {
-  background: #424242;
-  border: none;
-  height: 1px;
-  margin: 16px 0 17px;
+.profile__input:focus {
+  outline: 1px solid #101010;
 }
 
-.profile__form_email {
-  padding: 0;
-  border: none;
-  display: flex;
-  justify-content: space-between;
-  gap: 147px;
-  margin: 0;
-}
-
-.profile__email {
-  padding: 0;
-  border: none;
-  text-align: right;
-  background: #202020;
-  font-size: 11px;
-  line-height: 13px;
-  color: #fff;
-}
-
-.profile__email::placeholder {
-  color: #fff;
-}
-
-.profile__error {
+.profile__error_active {
   position: absolute;
-  display: none;
+  min-width: 410px;
   box-sizing: border-box;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #ff004c;
-  padding-top: 407px;
+  padding-top: 270px;
+  text-align: center;
 }
 
-.profile__error_visible {
-  display: block;
-}
-
-.profile__form_edit {
+.profile__edit-form {
   cursor: pointer;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
   font-weight: 400;
   font-size: 13px;
   line-height: 16px;
@@ -103,13 +89,10 @@
   background: none;
   border: none;
   transition: opacity 0.8s;
+  margin-top: 219px;
 }
 
-.profile__form_edit:hover {
-  opacity: 0.8;
-}
-
-.profile__form_exit {
+.profile__exit-form {
   cursor: pointer;
   background: none;
   border: none;
@@ -121,52 +104,36 @@
   transition: opacity 0.8s;
 }
 
-.profile__form_exit:hover {
-  opacity: 0.8;
-}
-
-.profile__form_save {
+.profile__save-form {
   cursor: pointer;
-  background: none;
   border: none;
   font-weight: 500;
   font-size: 14px;
   line-height: 17px;
   text-decoration: none;
-  transition: opacity 0.8s;
-  background: #f8f8f8;
-  border-radius: 3px;
-  min-width: 410px;
-  min-height: 45px;
-  padding: 0;
-  color: #c2c2c2;
-  margin-top: 5px;
-}
-
-.profile__form_save:hover {
-  opacity: 0.8;
-}
-
-.profile__form_save_active {
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 17px;
-  text-decoration: none;
-  transition: opacity 0.8s;
   background: #3456f3;
   border-radius: 3px;
   min-width: 410px;
   min-height: 45px;
   padding: 0;
   color: #fff;
-  margin-top: 5px;
+  margin-top: 223px;
 }
 
-.profile__form_save_active:hover {
+.profile__save-form:hover,
+.profile__exit-form:hover,
+.profile__edit-form:hover {
   opacity: 0.8;
+}
+
+.profile__save-form:disabled {
+  color: #c2c2c2;
+  background: #f8f8f8;
+  cursor: not-allowed;
+}
+
+.profile__save-form:disabled:hover {
+  opacity: 1;
 }
 
 @media screen and (max-width: 950px) {
@@ -175,11 +142,11 @@
   }
 
   .profile__form {
-    padding: 96px 0 210px;
+    padding: 96px 0 0;
   }
 
-  .profile__error {
-    padding-top: 367px;
+  .profile__edit-form {
+    margin-top: 210px;
   }
 }
 
@@ -189,37 +156,29 @@
   }
 
   .profile__form {
-    padding: 80px 0 379px;
+    padding: 80px 0 0;
     min-width: 260px;
   }
 
-  .profile__form_email {
-    gap: 10px;
+  .profile__edit-form {
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 379px;
   }
 
-  .profile__form_edit {
+  .profile__exit-form {
     font-size: 12px;
     line-height: 15px;
   }
 
-  .profile__form_exit {
-    font-size: 12px;
-    line-height: 15px;
-  }
-
-  .profile__form_save {
+  .profile__save-form {
     min-width: 260px;
     min-height: 35px;
-    margin-top: 13px;
+    margin-top: 379px;
   }
 
-  .profile__form_save_active {
+  .profile__error_active {
+    padding-top: 430px;
     min-width: 260px;
-    min-height: 35px;
-    margin-top: 13px;
-  }
-
-  .profile__error {
-    padding-top: 530px;
   }
 }
