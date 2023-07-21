@@ -8,7 +8,7 @@
   position: relative;
   width: 36px;
   height: 20px;
-  background: #3ddc84;
+  background-color: #343434;
   border-radius: 20px;
   cursor: pointer;
   appearance: none;
@@ -18,21 +18,21 @@
 .filter__input::after {
   content: '';
   position: absolute;
-  right: 6px;
+  left: 6px;
   top: 6px;
   width: 8px;
   height: 8px;
-  background-color: #fff;
+  background-color: #a0a0a0;
   border-radius: 50%;
   transform: translateX(0);
   transition: all 0.3s cubic-bezier(0.2, 0.85, 0.32, 1.2);
 }
 
 .filter__input:checked::after {
-  transform: translateX(calc(50% - 20px));
-  background-color: #a0a0a0;
+  transform: translateX(calc(200%));
+  background-color: #fff;
 }
 
 .filter__input:checked {
-  background-color: #343434;
+  background: #3ddc84;
 }

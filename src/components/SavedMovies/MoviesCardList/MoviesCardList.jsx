@@ -1,14 +1,32 @@
 import React from 'react';
 import './MoviesCardList.css';
-import MoviesCard from '../MoviesCard/MoviesCard';
+import MoviesCard from '../MoviesCard/MoviesCard.jsx';
 
-function MoviesCardList({ movies }) {
-  const [width, setWidth] = React.useState(window.innerWidth);
-
-  // useEffect для проверки рендера карточек в зависимости от ширины экрана
+function MoviesCardList({
+  movies,
+  setAddMovieButton,
+  addMoviesButton,
+  onCardDelete,
+  movieFilter,
+}) {
   React.useEffect(() => {
+    const innerWidth = window.innerWidth;
+    if (innerWidth <= 500) {
+      setAddMovieButton(5);
+    } else if (innerWidth <= 950) {
+      setAddMovieButton(8);
+    } else if (innerWidth <= 1280) {
+      setAddMovieButton(12);
+    }
+
     const handleSize = (e) => {
-      setWidth(e.target.innerWidth);
+      if (e.target.innerWidth <= 500) {
+        setAddMovieButton(5);
+      } else if (e.target.innerWidth <= 950) {
+        setAddMovieButton(8);
+      } else if (e.target.innerWidth <= 1280) {
+        setAddMovieButton(12);
+      }
     };
     window.addEventListener('resize', handleSize);
     return () => {
@@ -19,19 +37,32 @@ function MoviesCardList({ movies }) {
   return (
     <section className='cardlist'>
       <ul className='cardlist__list'>
-        {width >= 500
-          ? movies.slice(0, 3).map((movie) => (
+        {movieFilter
+          ? movies
+              .filter((movie) => {
+                return movie.duration < 40;
+              })
+              .slice(0, addMoviesButton)
+              .map((movie) => (
+                <li key={movie.movieId} className='cardlist__item-list'>
+                  <MoviesCard
+                    movie={movie}
+                    movies={movies}
+                    onCardDelete={onCardDelete}
+                    key={movies.id}
+                  />
+                </li>
+              ))
+          : movies.slice(0, addMoviesButton).map((movie) => (
               <li key={movie.movieId} className='cardlist__item-list'>
-                <MoviesCard movie={movie} />
+                <MoviesCard
+                  movie={movie}
+                  movies={movies}
+                  onCardDelete={onCardDelete}
+                  key={movies.id}
+                />
               </li>
-            ))
-          : width <= 500
-          ? movies.slice(0, 2).map((movie) => (
-              <li key={movie.movieId} className='cardlist__item-list'>
-                <MoviesCard movie={movie} />
-              </li>
-            ))
-          : ''}
+            ))}
       </ul>
     </section>
   );

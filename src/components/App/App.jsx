@@ -1,38 +1,236 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate, json } from 'react-router-dom';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute';
+import { mainApi } from '../../utils/MainApi';
+import * as auth from '../../utils/auth';
+import { setToLocalStorage, getFromLocalStorage } from '../../utils/helpers';
 import './App.css';
-
 import Main from '../Main/Main';
 import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies';
+import SavedMovies from '../SavedMovies/SavedMovies.jsx';
 import Profile from '../Profile/Profile';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(
+    false || localStorage.getItem('jwt')
+  );
+  const [savedCards, setSavedCards] = React.useState(
+    getFromLocalStorage('savedCards') || []
+  );
+  const navigate = useNavigate();
+  const [success, setSuccess] = React.useState(false);
+  const [cardList, setCardList] = React.useState(
+    getFromLocalStorage('movies') || []
+  );
+  const [isCardsLoading, setIsCardsLoading] = React.useState(false);
+  const [movieFilter, setMovieFilter] = React.useState(false);
+
+  React.useEffect(() => {
+    const jwt = getFromLocalStorage('jwt');
+    if (jwt) {
+      setIsCardsLoading(true);
+      setLoggedIn(true);
+      auth
+        .checkToken(jwt)
+        .then(() => {
+          navigate('/');
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+        .finally(() => {
+          setIsCardsLoading(false);
+        });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    const jwt = getFromLocalStorage('jwt');
+    if (loggedIn) {
+      mainApi
+        .getUser(jwt)
+        .then((user) => {
+          setCurrentUser(user);
+        })
+        .catch((error) => {
+          console.log(`Что-то пошло не так...(${error})`);
+        });
+      mainApi
+        .getSavedCard(jwt)
+        .then((data) => {
+          setSavedCards(data);
+          localStorage.setItem('savedMovies', JSON.stringify(data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [loggedIn]);
+
+  const handleLogin = ({ email, password }) => {
+    setIsCardsLoading(true);
+    auth
+      .authorize({ email, password })
+      .then((data) => {
+        if (data) {
+          setToLocalStorage('jwt', data.token);
+          setLoggedIn(true);
+          navigate('/movies', { replace: true });
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+        setSuccess(false);
+      })
+      .finally(() => {
+        setIsCardsLoading(false);
+      });
+  };
+
+  const handleRegistration = ({ name, email, password }) => {
+    auth
+      .register(name, email, password)
+      .then(() => {
+        navigate('/signin');
+      })
+      .catch((e) => {
+        console.error(e);
+        setSuccess(false);
+      });
+  };
+
+  const handleUpdateUser = (data) => {
+    const jwt = getFromLocalStorage('jwt');
+    mainApi
+      .editUser(data, jwt)
+      .then(() => {
+        setCurrentUser({ currentUser, name: data.name, email: data.email });
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.log(error);
+        setSuccess(false);
+      });
+  };
+
+  const handleSaveCard = (data) => {
+    const jwt = getFromLocalStorage('jwt');
+    mainApi
+      .savedCard(data, jwt)
+      .then((response) => {
+        setSavedCards([...savedCards, response]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
+    navigate('/', { replace: true });
+    setLoggedIn(false);
+  };
+
+  const handleDeleteCard = (id) => {
+    const jwt = getFromLocalStorage('jwt');
+    const searchCard = getFromLocalStorage('savedMovies');
+    mainApi
+      .deleteCard(id, jwt)
+      .then(() => {
+        const updateCardList = savedCards.filter((card) => card._id !== id);
+        setSavedCards(updateCardList);
+        if (searchCard) {
+          const updateSeach = searchCard.filter((card) => card._id !== id);
+
+          setToLocalStorage('searchMovies', json.stringify(updateSeach));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className='app'>
-      <Routes>
-        <Route
-          path='/'
-          element={
-            <>
-              <Header />
-              <Main />
-              <Footer />
-            </>
-          }
-        />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='/signup' element={<Register />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
+      {isCardsLoading ? (
+        <Preloader />
+      ) : (
+        <CurrentUserContext.Provider value={currentUser}>
+          <Routes>
+            <Route
+              path='/'
+              element={
+                <>
+                  <Header loggedIn={loggedIn} />
+                  <Main />
+                  <Footer />
+                </>
+              }
+            />
+            <Route
+              path='/movies'
+              element={
+                <ProtectedRoute
+                  element={Movies}
+                  loggedIn={loggedIn}
+                  savedCards={savedCards}
+                  onCardSave={handleSaveCard}
+                  cardList={cardList}
+                  setCardList={setCardList}
+                  handleDeleteCard={handleDeleteCard}
+                  movieFilter={movieFilter}
+                  setMovieFilter={setMovieFilter}
+                ></ProtectedRoute>
+              }
+            />
+            <Route
+              path='/saved-movies'
+              element={
+                <ProtectedRoute
+                  element={SavedMovies}
+                  loggedIn={loggedIn}
+                  savedMovies={savedCards}
+                  setSavedMovies={setSavedCards}
+                  onCardDelete={handleDeleteCard}
+                  movieFilter={movieFilter}
+                  setMovieFilter={setMovieFilter}
+                ></ProtectedRoute>
+              }
+            />
+            <Route
+              path='/signup'
+              element={
+                <Register onRegister={handleRegistration} loggedIn={loggedIn} />
+              }
+            />
+            <Route
+              path='/signin'
+              element={<Login onLogin={handleLogin} loggedIn={loggedIn} />}
+            />
+            <Route
+              path='/profile'
+              element={
+                <ProtectedRoute
+                  element={Profile}
+                  loggedIn={loggedIn}
+                  updateUser={handleUpdateUser}
+                  success={success}
+                  logout={handleLogout}
+                />
+              }
+            />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </CurrentUserContext.Provider>
+      )}
     </div>
   );
 }

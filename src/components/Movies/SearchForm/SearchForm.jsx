@@ -1,12 +1,15 @@
 import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import useForm from '../../../hooks/useForm';
 
-function SearchForm() {
-  // useState для проверки неактивной кнопки
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
+function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
+  const { values, handleChange } = useForm();
 
-  console.log(setButtonDisabled);
+  function handleSubmit(e) {
+    e.preventDefault();
+    addMovies(values.name);
+  }
 
   return (
     <section className='search'>
@@ -16,17 +19,24 @@ function SearchForm() {
           type='search'
           placeholder='Фильм'
           required
+          name='name'
+          value={values.name || ''}
+          onChange={handleChange}
         />
         <button
-          disabled={buttonDisabled ? true : false}
+          disabled={values.name ? false : true}
           type='submit'
           className='search__button-form'
+          onClick={handleSubmit}
         >
           Найти
         </button>
       </form>
       <div className='search__checkbox'>
-        <FilterCheckbox />
+        <FilterCheckbox
+          movieFilter={movieFilter}
+          setMovieFilter={setMovieFilter}
+        />
         <span className='search__span-checkbox'>Короткометражки</span>
       </div>
     </section>

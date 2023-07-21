@@ -14,6 +14,9 @@
 
 .card__container {
   min-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .card__title {

@@ -2,7 +2,6 @@ import React from 'react';
 import './Preloader.css';
 
 function Preloader() {
-  // проверить лоудер можно во вкладке через компонент Movies
   const [isLoading, setIsLoading] = React.useState(true);
   console.log(setIsLoading);
 
