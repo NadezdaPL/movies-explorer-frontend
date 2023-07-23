@@ -3,7 +3,6 @@ import './Login.css';
 import FormContainer from '../FormContainer/FormContainer';
 import useForm from '../../hooks/useForm';
 import { Navigate } from 'react-router-dom';
-import { REGEX_EMAIL } from '../../utils/constants';
 
 function Login({ onLogin, loggedIn }) {
   const { values, handleChange, error, valid } = useForm();
@@ -42,7 +41,6 @@ function Login({ onLogin, loggedIn }) {
             onChange={handleChange}
             value={values.email || ''}
             autoComplete='on'
-            pattern={REGEX_EMAIL}
           />
           <span
             id='email-error'

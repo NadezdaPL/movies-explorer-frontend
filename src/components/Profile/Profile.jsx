@@ -3,7 +3,6 @@ import './Profile.css';
 import Header from '../Header/Header';
 import useForm from '../../hooks/useForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { REGEX_EMAIL } from '../../utils/constants';
 
 function Profile({ loggedIn, updateUser, logout, success, errorApi }) {
   const { values, valid, handleChange, error, setValues, setValid } = useForm();
@@ -79,7 +78,6 @@ function Profile({ loggedIn, updateUser, logout, success, errorApi }) {
                 onChange={handleChange}
                 value={values.email || ''}
                 disabled={!errorMessage}
-                pattern={REGEX_EMAIL}
               />
             </fieldset>
             {successMessage && (

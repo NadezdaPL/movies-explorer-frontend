@@ -30,5 +30,5 @@ IP 158.160.38.71
 Frontend https://diploma-project.nomoredomains.rocks  
 Backend https://api.diploma-project.nomoredomains.rocks  
 Адрес репозитория: https://github.com/NadezdaPL/movies-explorer-frontend  
-Адрес репозитория: https://github.com/NadezdaPL/movies-explorer-frontend/pull/2  
+Адрес на pull requests: https://github.com/NadezdaPL/movies-explorer-frontend/pull/2  
 [Макет в Фигме](https://disk.yandex.ru/d/Az9utHCZJqRpug)

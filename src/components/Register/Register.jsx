@@ -3,7 +3,6 @@ import './Register.css';
 import FormContainer from '../FormContainer/FormContainer';
 import useForm from '../../hooks/useForm';
 import { Navigate } from 'react-router-dom';
-import { REGEX_EMAIL } from '../../utils/constants';
 
 function Register({ onRegister, loggedIn, onLoading }) {
   const { values, handleChange, error, valid } = useForm();
@@ -64,7 +63,6 @@ function Register({ onRegister, loggedIn, onLoading }) {
             type='email'
             id='email'
             required
-            pattern={REGEX_EMAIL}
             placeholder='pochta@yandex.ru'
             onChange={handleChange}
             value={values.email || ''}
