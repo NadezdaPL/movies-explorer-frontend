@@ -30,7 +30,7 @@ function SavedMovies({
       .getSavedCard(jwt)
       .then((data) => {
         setSavedMovies(data);
-        setToLocalStorage('savedMovies', data);
+        setToLocalStorage('mineSavedMovies', data);
       })
       .catch((error) => {
         console.log(error);

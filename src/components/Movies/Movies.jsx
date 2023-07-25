@@ -22,7 +22,7 @@ function Movies({
   const [isLoading, setIsLoading] = React.useState(false);
   const [addMoviesButton, setAddMovieButton] = React.useState(0);
   const [isActiveButton, setIsActiveButton] = React.useState(
-    cardList.length >= addMoviesButton
+    cardList.length <= addMoviesButton
   );
 
   function handleAddButton() {
@@ -34,7 +34,7 @@ function Movies({
     } else if (innerWidth <= 1280) {
       setAddMovieButton(addMoviesButton + 3);
     }
-    setIsActiveButton(cardList.length >= addMoviesButton);
+    setIsActiveButton(cardList.length === addMoviesButton);
   }
 
   function addMovies(query) {
@@ -42,8 +42,9 @@ function Movies({
     moviesApi.getInfo().then((movieResult) => {
       const resultMoviesFilter = moviesFilter(query, movieResult);
       setCardList(resultMoviesFilter);
-      setToLocalStorage('movies', resultMoviesFilter);
+      setToLocalStorage('mineMovies', resultMoviesFilter);
       setIsLoading(false);
+      setToLocalStorage('querySearch', query);
     });
   }
 
@@ -77,7 +78,7 @@ function Movies({
               handleDeleteCard={handleDeleteCard}
               movieFilter={movieFilter}
             />
-            {isActiveButton && (
+            {!isActiveButton && (
               <button className='movies__button' onClick={handleAddButton}>
                 Ещё
               </button>

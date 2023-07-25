@@ -3,15 +3,26 @@ import './Register.css';
 import FormContainer from '../FormContainer/FormContainer';
 import useForm from '../../hooks/useForm';
 import { Navigate } from 'react-router-dom';
+// import { REGEX_EMAIL } from '../../utils/constants';
+import { isValidEmail } from '../../utils/helpers';
 
 function Register({ onRegister, loggedIn, onLoading }) {
-  const { values, handleChange, error, valid } = useForm();
+  const { error, values, handleChange, valid } = useForm();
+  const [isValid, setIsValid] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [validationOn, setValidationOn] = React.useState(false);
+
+  function handleChangeEmail(e) {
+    setEmail(e.target.value);
+    setIsValid(isValidEmail(e.target.value));
+    setValidationOn(true);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
     onRegister({
       name: values.name,
-      email: values.email,
+      email,
       password: values.password,
     });
   }
@@ -26,7 +37,9 @@ function Register({ onRegister, loggedIn, onLoading }) {
         onSubmit={handleSubmit}
         buttonText='Зарегистрироваться'
         valid={valid}
-        isDisable={!valid}
+        isDisable={!isValid}
+        isName={values.name || ''}
+        isPassword={values.password || ''} 
       >
         <fieldset className='form__fieldset'>
           <label className='form__label' htmlFor='name'>
@@ -64,18 +77,18 @@ function Register({ onRegister, loggedIn, onLoading }) {
             id='email'
             required
             placeholder='pochta@yandex.ru'
-            onChange={handleChange}
-            value={values.email || ''}
+            onChange={handleChangeEmail}
+            value={email || ''}
             autoComplete='on'
             disabled={onLoading ? true : false}
           />
           <span
             id='email-error'
             className={`form__error ${
-              error.email ? 'form__error_visible' : ''
+             validationOn && !isValid ? 'form__error_visible' : ''
             }`}
           >
-            {error.email || ''}
+            {'Введите корректную электронную почту' || ''}
           </span>
         </fieldset>
         <fieldset className='form__fieldset'>

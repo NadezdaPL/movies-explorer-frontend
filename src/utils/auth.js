@@ -18,7 +18,6 @@ function checkResponse(response) {
 
 export async function register(name, email, password) {
   const response = await fetch(`${BASE_URL}/signup`, {
-    mode: 'no-cors',
     method: 'POST',
     headers: {
       Accept: 'application/json',

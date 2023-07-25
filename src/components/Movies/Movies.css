@@ -23,6 +23,11 @@
   opacity: 0.8;
 }
 
+.movies__no-movies {
+  text-align: center;
+  
+}
+
 @media screen and (max-width: 950px) {
   .movies__button {
     margin: 50px auto 83px;

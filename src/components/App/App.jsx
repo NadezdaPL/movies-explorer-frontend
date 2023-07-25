@@ -20,7 +20,7 @@ import Preloader from '../Preloader/Preloader';
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   const [loggedIn, setLoggedIn] = React.useState(
-    false || localStorage.getItem('jwt')
+    false || getFromLocalStorage('jwt')
   );
   const [savedCards, setSavedCards] = React.useState(
     getFromLocalStorage('savedCards') || []
@@ -28,10 +28,10 @@ function App() {
   const navigate = useNavigate();
   const [success, setSuccess] = React.useState(false);
   const [cardList, setCardList] = React.useState(
-    getFromLocalStorage('movies') || []
+    getFromLocalStorage('mineMovies') || []
   );
   const [isCardsLoading, setIsCardsLoading] = React.useState(false);
-  const [movieFilter, setMovieFilter] = React.useState(false);
+  const [movieFilter, setMovieFilter] = React.useState(false || getFromLocalStorage('checkedButton'));
 
   React.useEffect(() => {
     const jwt = getFromLocalStorage('jwt');
@@ -67,7 +67,7 @@ function App() {
         .getSavedCard(jwt)
         .then((data) => {
           setSavedCards(data);
-          localStorage.setItem('savedMovies', JSON.stringify(data));
+          localStorage.setItem('mineSavedMovies', JSON.stringify(data));
         })
         .catch((error) => {
           console.log(error);
@@ -99,7 +99,7 @@ function App() {
     auth
       .register(name, email, password)
       .then(() => {
-        navigate('/signin');
+        handleLogin({ email, password });
       })
       .catch((e) => {
         console.error(e);
@@ -134,14 +134,15 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('jwt');
+    localStorage.clear()
     navigate('/', { replace: true });
     setLoggedIn(false);
+    window.location.reload();
   };
 
   const handleDeleteCard = (id) => {
     const jwt = getFromLocalStorage('jwt');
-    const searchCard = getFromLocalStorage('savedMovies');
+    const searchCard = getFromLocalStorage('mineSavedMovies');
     mainApi
       .deleteCard(id, jwt)
       .then(() => {
