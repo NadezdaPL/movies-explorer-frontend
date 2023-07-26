@@ -6,8 +6,14 @@ import MoviesCardList from './MoviesCardList/MoviesCardList';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 import { moviesApi } from '../../utils/MoviesApi';
-// import { filter } from '../../utils/constants';
 import { setToLocalStorage } from '../../utils/helpers';
+import {
+  MOVIE_ADD_THREE,
+  MOVIE_ADD_TWO,
+  MOVIE_SCREEN_LARGE,
+  MOVIE_SCREEN_MEDIUM,
+  MOVIE_SCREEN_MOBILE,
+} from '../../utils/constants';
 
 function Movies({
   loggedIn,
@@ -24,15 +30,16 @@ function Movies({
   const [isActiveButton, setIsActiveButton] = React.useState(
     cardList.length <= addMoviesButton
   );
+  const [isFind, setIsFind] = React.useState(false);
 
   function handleAddButton() {
     const innerWidth = window.innerWidth;
-    if (innerWidth <= 500) {
-      setAddMovieButton(addMoviesButton + 2);
-    } else if (innerWidth <= 950) {
-      setAddMovieButton(addMoviesButton + 2);
-    } else if (innerWidth <= 1280) {
-      setAddMovieButton(addMoviesButton + 3);
+    if (innerWidth <= MOVIE_SCREEN_MOBILE) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
+    } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
+    } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_THREE);
     }
     setIsActiveButton(cardList.length === addMoviesButton);
   }
@@ -45,6 +52,8 @@ function Movies({
       setToLocalStorage('mineMovies', resultMoviesFilter);
       setIsLoading(false);
       setToLocalStorage('querySearch', query);
+      resultMoviesFilter.length === 0 ? setIsFind(true) : setIsFind(false);
+      setIsActiveButton(resultMoviesFilter.length <= addMoviesButton);
     });
   }
 
@@ -68,6 +77,7 @@ function Movies({
               addMovies={addMovies}
               movieFilter={movieFilter}
               setMovieFilter={setMovieFilter}
+              setIsFind={setIsFind}
             />
             <MoviesCardList
               movies={cardList}
@@ -78,6 +88,9 @@ function Movies({
               handleDeleteCard={handleDeleteCard}
               movieFilter={movieFilter}
             />
+            {isFind && (
+              <span className='movies__no-movies'>«Ничего не найдено»</span>
+            )}
             {!isActiveButton && (
               <button className='movies__button' onClick={handleAddButton}>
                 Ещё

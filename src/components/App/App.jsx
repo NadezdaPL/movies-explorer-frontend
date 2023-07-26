@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate, json } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
@@ -26,12 +26,15 @@ function App() {
     getFromLocalStorage('savedCards') || []
   );
   const navigate = useNavigate();
+
   const [success, setSuccess] = React.useState(false);
   const [cardList, setCardList] = React.useState(
     getFromLocalStorage('mineMovies') || []
   );
   const [isCardsLoading, setIsCardsLoading] = React.useState(false);
-  const [movieFilter, setMovieFilter] = React.useState(false || getFromLocalStorage('checkedButton'));
+  const [movieFilter, setMovieFilter] = React.useState(
+    false || getFromLocalStorage('checkedButton')
+  );
 
   React.useEffect(() => {
     const jwt = getFromLocalStorage('jwt');
@@ -41,7 +44,7 @@ function App() {
       auth
         .checkToken(jwt)
         .then(() => {
-          navigate('/');
+          setLoggedIn(true);
         })
         .catch((e) => {
           console.error(e);
@@ -134,7 +137,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    localStorage.clear()
+    localStorage.clear();
     navigate('/', { replace: true });
     setLoggedIn(false);
     window.location.reload();
@@ -151,7 +154,7 @@ function App() {
         if (searchCard) {
           const updateSeach = searchCard.filter((card) => card._id !== id);
 
-          setToLocalStorage('searchMovies', json.stringify(updateSeach));
+          setToLocalStorage('searchMovies', updateSeach);
         }
       })
       .catch((error) => {
@@ -162,7 +165,7 @@ function App() {
   return (
     <div className='app'>
       {isCardsLoading ? (
-        <Preloader />
+        <Preloader isCardsLoading={isCardsLoading} />
       ) : (
         <CurrentUserContext.Provider value={currentUser}>
           <Routes>
@@ -203,6 +206,7 @@ function App() {
                   onCardDelete={handleDeleteCard}
                   movieFilter={movieFilter}
                   setMovieFilter={setMovieFilter}
+                  isCardsLoading={isCardsLoading}
                 ></ProtectedRoute>
               }
             />

@@ -9,21 +9,20 @@ function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
   const [isSpan, setIsSpan] = React.useState(false);
 
   useEffect(() => {
-    setValues({ name: getFromLocalStorage('querySearch') })
+    setValues({ name: getFromLocalStorage('querySearch') });
     if (values.name) {
-      setValid(true)
+      setValid(true);
     }
-  }, [])
-
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
-    if(values.name) {
+    if (values.name) {
+      console.log('moviess', addMovies);
       addMovies(values.name);
     } else {
-      setIsSpan(true)
+      setIsSpan(true);
     }
-    
   }
 
   return (
@@ -47,7 +46,9 @@ function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
           Найти
         </button>
       </form>
-      { isSpan && <span className='search__span'>Нужно ввести ключевое слово</span>}
+      {isSpan && (
+        <span className='search__span'>Нужно ввести ключевое слово</span>
+      )}
       <div className='search__checkbox'>
         <FilterCheckbox
           movieFilter={movieFilter}

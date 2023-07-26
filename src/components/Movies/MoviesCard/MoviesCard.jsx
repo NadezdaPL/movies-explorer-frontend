@@ -1,6 +1,6 @@
 import React from 'react';
 import './MoviesCard.css';
-import { converter } from '../../../utils/constants';
+import { converter } from '../../../utils/helpers';
 
 function MoviesCard({ movie, onCardSave, savedCards, handleDeleteCard }) {
   const [isLiked, setIsLiked] = React.useState(

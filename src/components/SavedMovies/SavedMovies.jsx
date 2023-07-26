@@ -3,12 +3,18 @@ import './SavedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList.jsx';
-// import { items } from '../../utils/movies.js';
 import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 import SavedDevider from './SavedDevider/SavedDevider';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/helpers';
 import { mainApi } from '../../utils/MainApi';
+import {
+  MOVIE_ADD_THREE,
+  MOVIE_ADD_TWO,
+  MOVIE_SCREEN_LARGE,
+  MOVIE_SCREEN_MEDIUM,
+  MOVIE_SCREEN_MOBILE,
+} from '../../utils/constants';
 
 function SavedMovies({
   loggedIn,
@@ -17,8 +23,8 @@ function SavedMovies({
   setSavedMovies,
   movieFilter,
   setMovieFilter,
+  isCardsLoading,
 }) {
-  const [isLoading, setIsLoading] = React.useState(false);
   const [addMoviesButton, setAddMovieButton] = React.useState(0);
   const [isActiveButton, setIsActiveButton] = React.useState(
     savedMovies.length === 0 || savedMovies.length <= addMoviesButton
@@ -39,19 +45,19 @@ function SavedMovies({
 
   function handleAddButton() {
     const innerWidth = window.innerWidth;
-    if (innerWidth <= 500) {
-      setAddMovieButton(addMoviesButton + 2);
-    } else if (innerWidth <= 950) {
-      setAddMovieButton(addMoviesButton + 2);
-    } else if (innerWidth <= 1280) {
-      setAddMovieButton(addMoviesButton + 3);
+    if (innerWidth <= MOVIE_SCREEN_MOBILE) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
+    } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
+    } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_THREE);
     }
     setIsActiveButton(savedMovies.length >= addMoviesButton);
   }
 
   return (
     <>
-      {isLoading ? (
+      {isCardsLoading ? (
         <Preloader />
       ) : (
         <>

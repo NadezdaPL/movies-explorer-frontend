@@ -3,26 +3,15 @@ import './Register.css';
 import FormContainer from '../FormContainer/FormContainer';
 import useForm from '../../hooks/useForm';
 import { Navigate } from 'react-router-dom';
-// import { REGEX_EMAIL } from '../../utils/constants';
-import { isValidEmail } from '../../utils/helpers';
 
 function Register({ onRegister, loggedIn, onLoading }) {
   const { error, values, handleChange, valid } = useForm();
-  const [isValid, setIsValid] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [validationOn, setValidationOn] = React.useState(false);
-
-  function handleChangeEmail(e) {
-    setEmail(e.target.value);
-    setIsValid(isValidEmail(e.target.value));
-    setValidationOn(true);
-  }
 
   function handleSubmit(e) {
     e.preventDefault();
     onRegister({
       name: values.name,
-      email,
+      email: values.email,
       password: values.password,
     });
   }
@@ -37,9 +26,7 @@ function Register({ onRegister, loggedIn, onLoading }) {
         onSubmit={handleSubmit}
         buttonText='Зарегистрироваться'
         valid={valid}
-        isDisable={!isValid}
-        isName={values.name || ''}
-        isPassword={values.password || ''} 
+        isDisable={!valid}
       >
         <fieldset className='form__fieldset'>
           <label className='form__label' htmlFor='name'>
@@ -56,7 +43,7 @@ function Register({ onRegister, loggedIn, onLoading }) {
             placeholder='Надежда'
             onChange={handleChange}
             value={values.name || ''}
-            autoComplete='on'
+            autoComplete='off'
             disabled={onLoading ? true : false}
           />
           <span
@@ -73,22 +60,22 @@ function Register({ onRegister, loggedIn, onLoading }) {
           <input
             className={`form__input ${error.email ? 'form__input_error' : ''}`}
             name='email'
-            type='email'
+            type='text'
             id='email'
             required
             placeholder='pochta@yandex.ru'
-            onChange={handleChangeEmail}
-            value={email || ''}
-            autoComplete='on'
+            onChange={handleChange}
+            value={values.email || ''}
+            autoComplete='off'
             disabled={onLoading ? true : false}
           />
           <span
             id='email-error'
             className={`form__error ${
-             validationOn && !isValid ? 'form__error_visible' : ''
+              error.email ? 'form__error_visible' : ''
             }`}
           >
-            {'Введите корректную электронную почту' || ''}
+            {error.email || ''}
           </span>
         </fieldset>
         <fieldset className='form__fieldset'>
@@ -108,8 +95,8 @@ function Register({ onRegister, loggedIn, onLoading }) {
             placeholder='Пароль'
             onChange={handleChange}
             value={values.password || ''}
-            autoComplete='on'
             disabled={onLoading ? true : false}
+            autoComplete='off'
           />
           <span
             id='password-error'

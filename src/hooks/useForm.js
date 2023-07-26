@@ -1,4 +1,5 @@
 import React from 'react';
+import { isValidEmail } from '../utils/helpers';
 
 function useForm() {
   const [values, setValues] = React.useState({});
@@ -7,6 +8,15 @@ function useForm() {
 
   const handleChange = (event) => {
     const { value, name } = event.target;
+    setValues({ ...values, [name]: value });
+
+    if (name === 'email' && !isValidEmail(value)) {
+      event.target.setCustomValidity(
+        'Необходимо указать e-mail в формате pochta@yandex.ru'
+      );
+    } else {
+      event.target.setCustomValidity('');
+    }
     setValues({ ...values, [name]: value });
     setError({ ...error, [name]: event.target.validationMessage });
     setValid(event.target.closest('form').checkValidity());

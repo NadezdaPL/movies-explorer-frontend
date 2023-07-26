@@ -1,15 +1,10 @@
-export function converter(item) {
-  const minute = item % 60;
-  const hour = (item - minute) / 60;
-  if (hour === 0) {
-    return `${minute}m`;
-  } else if (minute === 0) {
-    return `${hour}ч`;
-  } else {
-    return `${hour}ч ${minute}m`;
-  }
-}
-
 export const BEATFILM = 'https://api.nomoreparties.co';
-
-export const REGEX_EMAIL = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+export const MOVIE_SHORT = 40;
+export const MOVIE_SCREEN_LARGE = 1280;
+export const MOVIE_SCREEN_MEDIUM = 950;
+export const MOVIE_SCREEN_MOBILE = 500;
+export const MOVIE_SCREEN_FIVE = 5;
+export const MOVIE_SCREEN_EIGHT = 8;
+export const MOVIE_SCREEN_TWELVE = 12;
+export const MOVIE_ADD_TWO = 2;
+export const MOVIE_ADD_THREE = 3;

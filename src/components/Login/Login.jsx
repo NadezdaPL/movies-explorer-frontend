@@ -4,7 +4,7 @@ import FormContainer from '../FormContainer/FormContainer';
 import useForm from '../../hooks/useForm';
 import { Navigate } from 'react-router-dom';
 
-function Login({ onLogin, loggedIn }) {
+function Login({ onLogin, loggedIn, onLoading }) {
   const { values, handleChange, error, valid } = useForm();
 
   function handleSubmit(e) {
@@ -34,13 +34,14 @@ function Login({ onLogin, loggedIn }) {
           <input
             className={`form__input ${error.email ? 'form__input_error' : ''}`}
             name='email'
-            type='email'
+            type='text'
             id='email'
             required
             placeholder='pochta@yandex.ru'
             onChange={handleChange}
             value={values.email || ''}
-            autoComplete='on'
+            autoComplete='off'
+            disabled={onLoading ? true : false}
           />
           <span
             id='email-error'
@@ -48,7 +49,7 @@ function Login({ onLogin, loggedIn }) {
               error.email ? 'form__error_visible' : ''
             }`}
           >
-            {error.email}
+            {error.email || ''}
           </span>
         </fieldset>
         <fieldset className='form__fieldset'>
@@ -60,11 +61,13 @@ function Login({ onLogin, loggedIn }) {
             name='password'
             type='password'
             id='password'
+            minLength='6'
             required
             placeholder='Пароль'
             onChange={handleChange}
             value={values.password || ''}
-            autoComplete='on'
+            autoComplete='off'
+            disabled={onLoading ? true : false}
           />
           <span
             id='password-error'
@@ -72,7 +75,7 @@ function Login({ onLogin, loggedIn }) {
               error.password ? 'form__error_visible' : ''
             }`}
           >
-            {error.password}
+            {error.password || ''}
           </span>
         </fieldset>
       </FormContainer>
