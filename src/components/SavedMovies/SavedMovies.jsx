@@ -3,7 +3,6 @@ import './SavedMovies.css';
 import Header from '../Header/Header';
 import SearchForm from '../Movies/SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList.jsx';
-import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 import SavedDevider from './SavedDevider/SavedDevider';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/helpers';
@@ -23,7 +22,6 @@ function SavedMovies({
   setSavedMovies,
   movieFilter,
   setMovieFilter,
-  isCardsLoading,
 }) {
   const [addMoviesButton, setAddMovieButton] = React.useState(0);
   const [isActiveButton, setIsActiveButton] = React.useState(
@@ -57,33 +55,24 @@ function SavedMovies({
 
   return (
     <>
-      {isCardsLoading ? (
-        <Preloader />
-      ) : (
-        <>
-          <Header loggedIn={loggedIn} />
-          <main className='movies'>
-            <SearchForm
-              movieFilter={movieFilter}
-              setMovieFilter={setMovieFilter}
-            />
-            <MoviesCardList
-              addMoviesButton={addMoviesButton}
-              movies={savedMovies}
-              setAddMovieButton={setAddMovieButton}
-              onCardDelete={onCardDelete}
-              movieFilter={movieFilter}
-            />
-            {!isActiveButton && (
-              <button className='movies__button' onClick={handleAddButton}>
-                Ещё
-              </button>
-            )}
-            <SavedDevider />
-          </main>
-          <Footer />
-        </>
-      )}
+      <Header loggedIn={loggedIn} />
+      <main className='movies'>
+        <SearchForm movieFilter={movieFilter} setMovieFilter={setMovieFilter} />
+        <MoviesCardList
+          addMoviesButton={addMoviesButton}
+          movies={savedMovies}
+          setAddMovieButton={setAddMovieButton}
+          onCardDelete={onCardDelete}
+          movieFilter={movieFilter}
+        />
+        {!isActiveButton && (
+          <button className='movies__button' onClick={handleAddButton}>
+            Ещё
+          </button>
+        )}
+        <SavedDevider />
+      </main>
+      <Footer />
     </>
   );
 }

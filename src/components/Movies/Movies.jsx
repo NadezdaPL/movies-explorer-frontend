@@ -3,7 +3,6 @@ import './Movies.css';
 import Header from '../Header/Header';
 import SearchForm from './SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList';
-import Preloader from '../Preloader/Preloader';
 import Footer from '../Footer/Footer';
 import { moviesApi } from '../../utils/MoviesApi';
 import { setToLocalStorage } from '../../utils/helpers';
@@ -24,8 +23,9 @@ function Movies({
   handleDeleteCard,
   movieFilter,
   setMovieFilter,
+  isCardsLoading,
+  setIsCardsLoading
 }) {
-  const [isLoading, setIsLoading] = React.useState(false);
   const [addMoviesButton, setAddMovieButton] = React.useState(0);
   const [isActiveButton, setIsActiveButton] = React.useState(
     cardList.length <= addMoviesButton
@@ -45,15 +45,15 @@ function Movies({
   }
 
   function addMovies(query) {
-    setIsLoading(true);
+    setIsCardsLoading(true);
     moviesApi.getInfo().then((movieResult) => {
       const resultMoviesFilter = moviesFilter(query, movieResult);
       setCardList(resultMoviesFilter);
       setToLocalStorage('mineMovies', resultMoviesFilter);
-      setIsLoading(false);
       setToLocalStorage('querySearch', query);
       resultMoviesFilter.length === 0 ? setIsFind(true) : setIsFind(false);
       setIsActiveButton(resultMoviesFilter.length <= addMoviesButton);
+      setIsCardsLoading(false);
     });
   }
 
@@ -66,40 +66,35 @@ function Movies({
 
   return (
     <>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <>
-          <Header loggedIn={loggedIn} />
-          <main className='movies'>
-            <SearchForm
-              cardList={cardList}
-              addMovies={addMovies}
-              movieFilter={movieFilter}
-              setMovieFilter={setMovieFilter}
-              setIsFind={setIsFind}
-            />
-            <MoviesCardList
-              movies={cardList}
-              addMoviesButton={addMoviesButton}
-              setAddMovieButton={setAddMovieButton}
-              onCardSave={onCardSave}
-              savedCards={savedCards}
-              handleDeleteCard={handleDeleteCard}
-              movieFilter={movieFilter}
-            />
-            {isFind && (
-              <span className='movies__no-movies'>«Ничего не найдено»</span>
-            )}
-            {!isActiveButton && (
-              <button className='movies__button' onClick={handleAddButton}>
-                Ещё
-              </button>
-            )}
-          </main>
-          <Footer />
-        </>
-      )}
+      <Header loggedIn={loggedIn} />
+      <main className='movies'>
+        <SearchForm
+          cardList={cardList}
+          addMovies={addMovies}
+          movieFilter={movieFilter}
+          setMovieFilter={setMovieFilter}
+          setIsFind={setIsFind}
+        />
+        <MoviesCardList
+          movies={cardList}
+          addMoviesButton={addMoviesButton}
+          setAddMovieButton={setAddMovieButton}
+          onCardSave={onCardSave}
+          savedCards={savedCards}
+          handleDeleteCard={handleDeleteCard}
+          movieFilter={movieFilter}
+          isCardsLoading={isCardsLoading}
+        />
+        {isFind && (
+          <span className='movies__no-movies'>«Ничего не найдено»</span>
+        )}
+        {!isActiveButton && (
+          <button className='movies__button' onClick={handleAddButton}>
+            Ещё
+          </button>
+        )}
+      </main>
+      <Footer />
     </>
   );
 }

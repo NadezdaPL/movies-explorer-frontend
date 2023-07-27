@@ -164,78 +164,75 @@ function App() {
 
   return (
     <div className='app'>
-      {isCardsLoading ? (
-        <Preloader isCardsLoading={isCardsLoading} />
-      ) : (
-        <CurrentUserContext.Provider value={currentUser}>
-          <Routes>
-            <Route
-              path='/'
-              element={
-                <>
-                  <Header loggedIn={loggedIn} />
-                  <Main />
-                  <Footer />
-                </>
-              }
-            />
-            <Route
-              path='/movies'
-              element={
-                <ProtectedRoute
-                  element={Movies}
-                  loggedIn={loggedIn}
-                  savedCards={savedCards}
-                  onCardSave={handleSaveCard}
-                  cardList={cardList}
-                  setCardList={setCardList}
-                  handleDeleteCard={handleDeleteCard}
-                  movieFilter={movieFilter}
-                  setMovieFilter={setMovieFilter}
-                ></ProtectedRoute>
-              }
-            />
-            <Route
-              path='/saved-movies'
-              element={
-                <ProtectedRoute
-                  element={SavedMovies}
-                  loggedIn={loggedIn}
-                  savedMovies={savedCards}
-                  setSavedMovies={setSavedCards}
-                  onCardDelete={handleDeleteCard}
-                  movieFilter={movieFilter}
-                  setMovieFilter={setMovieFilter}
-                  isCardsLoading={isCardsLoading}
-                ></ProtectedRoute>
-              }
-            />
-            <Route
-              path='/signup'
-              element={
-                <Register onRegister={handleRegistration} loggedIn={loggedIn} />
-              }
-            />
-            <Route
-              path='/signin'
-              element={<Login onLogin={handleLogin} loggedIn={loggedIn} />}
-            />
-            <Route
-              path='/profile'
-              element={
-                <ProtectedRoute
-                  element={Profile}
-                  loggedIn={loggedIn}
-                  updateUser={handleUpdateUser}
-                  success={success}
-                  logout={handleLogout}
-                />
-              }
-            />
-            <Route path='*' element={<NotFound />} />
-          </Routes>
-        </CurrentUserContext.Provider>
-      )}
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route
+            path='/'
+            element={
+              <>
+                <Header loggedIn={loggedIn} />
+                <Main />
+                <Footer />
+              </>
+            }
+          />
+          <Route
+            path='/movies'
+            element={
+              <ProtectedRoute
+                element={Movies}
+                loggedIn={loggedIn}
+                savedCards={savedCards}
+                onCardSave={handleSaveCard}
+                cardList={cardList}
+                setCardList={setCardList}
+                handleDeleteCard={handleDeleteCard}
+                movieFilter={movieFilter}
+                setMovieFilter={setMovieFilter}
+                isCardsLoading={isCardsLoading}
+                setIsCardsLoading={setIsCardsLoading}
+              ></ProtectedRoute>
+            }
+          />
+          <Route
+            path='/saved-movies'
+            element={
+              <ProtectedRoute
+                element={SavedMovies}
+                loggedIn={loggedIn}
+                savedMovies={savedCards}
+                setSavedMovies={setSavedCards}
+                onCardDelete={handleDeleteCard}
+                movieFilter={movieFilter}
+                setMovieFilter={setMovieFilter}
+              ></ProtectedRoute>
+            }
+          />
+          <Route
+            path='/signup'
+            element={
+              <Register onRegister={handleRegistration} loggedIn={loggedIn} />
+            }
+          />
+          <Route
+            path='/signin'
+            element={<Login onLogin={handleLogin} loggedIn={loggedIn} />}
+          />
+          <Route
+            path='/profile'
+            element={
+              <ProtectedRoute
+                element={Profile}
+                loggedIn={loggedIn}
+                updateUser={handleUpdateUser}
+                success={success}
+                logout={handleLogout}
+              />
+            }
+          />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+      </CurrentUserContext.Provider>
     </div>
   );
 }

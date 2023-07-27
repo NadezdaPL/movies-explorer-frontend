@@ -10,6 +10,7 @@ import {
   MOVIE_SCREEN_TWELVE,
   MOVIE_SHORT,
 } from '../../../utils/constants';
+import Preloader from '../../Preloader/Preloader';
 
 function MoviesCardList({
   movies,
@@ -20,6 +21,7 @@ function MoviesCardList({
   savedCards,
   handleDeleteCard,
   movieFilter,
+  isCardsLoading,
 }) {
   React.useEffect(() => {
     const innerWidth = window.innerWidth;
@@ -48,39 +50,45 @@ function MoviesCardList({
   }, []);
 
   return (
-    <section className='cardlist'>
-      <ul className='cardlist__list'>
-        {movieFilter
-          ? movies
-              .filter((movie) => {
-                return movie.duration < MOVIE_SHORT;
-              })
-              .slice(0, addMoviesButton)
-              .map((movie, index) => (
-                <li key={index} className='cardlist__item-list'>
-                  <MoviesCard
-                    movie={movie}
-                    movies={movies}
-                    onCardSave={onCardSave}
-                    key={movies._id}
-                    savedCards={savedCards}
-                    handleDeleteCard={handleDeleteCard}
-                  />
-                </li>
-              ))
-          : movies.slice(0, addMoviesButton).map((movie) => (
-              <li key={movie.id} className='cardlist__item-list'>
-                <MoviesCard
-                  movie={movie}
-                  movies={movies}
-                  onCardSave={onCardSave}
-                  savedCards={savedCards}
-                  handleDeleteCard={handleDeleteCard}
-                />
-              </li>
-            ))}
-      </ul>
-    </section>
+    <>
+      {isCardsLoading ? (
+        <Preloader />
+      ) : (
+        <section className='cardlist'>
+          <ul className='cardlist__list'>
+            {movieFilter
+              ? movies
+                  .filter((movie) => {
+                    return movie.duration < MOVIE_SHORT;
+                  })
+                  .slice(0, addMoviesButton)
+                  .map((movie, index) => (
+                    <li key={index} className='cardlist__item-list'>
+                      <MoviesCard
+                        movie={movie}
+                        movies={movies}
+                        onCardSave={onCardSave}
+                        key={movies._id}
+                        savedCards={savedCards}
+                        handleDeleteCard={handleDeleteCard}
+                      />
+                    </li>
+                  ))
+              : movies.slice(0, addMoviesButton).map((movie) => (
+                  <li key={movie.id} className='cardlist__item-list'>
+                    <MoviesCard
+                      movie={movie}
+                      movies={movies}
+                      onCardSave={onCardSave}
+                      savedCards={savedCards}
+                      handleDeleteCard={handleDeleteCard}
+                    />
+                  </li>
+                ))}
+          </ul>
+        </section>
+      )}
+    </>
   );
 }
 

@@ -18,7 +18,6 @@ function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
   function handleSubmit(e) {
     e.preventDefault();
     if (values.name) {
-      console.log('moviess', addMovies);
       addMovies(values.name);
     } else {
       setIsSpan(true);
