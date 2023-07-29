@@ -15,7 +15,6 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Preloader from '../Preloader/Preloader';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
@@ -204,7 +203,10 @@ function App() {
                 setSavedMovies={setSavedCards}
                 onCardDelete={handleDeleteCard}
                 movieFilter={movieFilter}
+                setCardList={setCardList}
                 setMovieFilter={setMovieFilter}
+                isCardsLoading={isCardsLoading}
+                setIsCardsLoading={setIsCardsLoading}
               ></ProtectedRoute>
             }
           />

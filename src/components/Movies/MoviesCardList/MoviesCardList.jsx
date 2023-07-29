@@ -31,6 +31,8 @@ function MoviesCardList({
       setAddMovieButton(MOVIE_SCREEN_EIGHT);
     } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
       setAddMovieButton(MOVIE_SCREEN_TWELVE);
+    } else if (innerWidth > MOVIE_SCREEN_LARGE) {
+      setAddMovieButton(MOVIE_SCREEN_TWELVE);
     }
 
     const handleSize = (e) => {
@@ -39,6 +41,8 @@ function MoviesCardList({
       } else if (e.target.innerWidth <= MOVIE_SCREEN_MEDIUM) {
         setAddMovieButton(MOVIE_SCREEN_EIGHT);
       } else if (e.target.innerWidth <= MOVIE_SCREEN_LARGE) {
+        setAddMovieButton(MOVIE_SCREEN_TWELVE);
+      } else {
         setAddMovieButton(MOVIE_SCREEN_TWELVE);
       }
     };
@@ -61,29 +65,26 @@ function MoviesCardList({
                   .filter((movie) => {
                     return movie.duration < MOVIE_SHORT;
                   })
-                  .slice(0, addMoviesButton)
-                  .map((movie, index) => (
-                    <li key={index} className='cardlist__item-list'>
+                  .slice(0)
+                  .map((movie) => (
                       <MoviesCard
                         movie={movie}
                         movies={movies}
                         onCardSave={onCardSave}
-                        key={movies._id}
                         savedCards={savedCards}
                         handleDeleteCard={handleDeleteCard}
+                        key={movie.id}
                       />
-                    </li>
                   ))
               : movies.slice(0, addMoviesButton).map((movie) => (
-                  <li key={movie.id} className='cardlist__item-list'>
                     <MoviesCard
                       movie={movie}
                       movies={movies}
                       onCardSave={onCardSave}
                       savedCards={savedCards}
                       handleDeleteCard={handleDeleteCard}
+                      key={movie.id}
                     />
-                  </li>
                 ))}
           </ul>
         </section>

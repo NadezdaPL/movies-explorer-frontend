@@ -4,6 +4,9 @@
 }
 
 .movies__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #2f2f2f;
   border-radius: 6px;
   font-weight: 500;

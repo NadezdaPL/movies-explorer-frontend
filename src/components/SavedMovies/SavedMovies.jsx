@@ -1,19 +1,13 @@
 import React from 'react';
 import './SavedMovies.css';
 import Header from '../Header/Header';
-import SearchForm from '../Movies/SearchForm/SearchForm';
+import SearchForm from '../SavedMovies/SearchForm/SearchForm';
 import MoviesCardList from './MoviesCardList/MoviesCardList.jsx';
 import Footer from '../Footer/Footer';
+import { moviesApi } from '../../utils/MoviesApi';
 import SavedDevider from './SavedDevider/SavedDevider';
 import { getFromLocalStorage, setToLocalStorage } from '../../utils/helpers';
 import { mainApi } from '../../utils/MainApi';
-import {
-  MOVIE_ADD_THREE,
-  MOVIE_ADD_TWO,
-  MOVIE_SCREEN_LARGE,
-  MOVIE_SCREEN_MEDIUM,
-  MOVIE_SCREEN_MOBILE,
-} from '../../utils/constants';
 
 function SavedMovies({
   loggedIn,
@@ -22,11 +16,9 @@ function SavedMovies({
   setSavedMovies,
   movieFilter,
   setMovieFilter,
+  setIsCardsLoading,
+  setCardList
 }) {
-  const [addMoviesButton, setAddMovieButton] = React.useState(0);
-  const [isActiveButton, setIsActiveButton] = React.useState(
-    savedMovies.length === 0 || savedMovies.length <= addMoviesButton
-  );
 
   React.useEffect(() => {
     const jwt = getFromLocalStorage('jwt');
@@ -41,35 +33,35 @@ function SavedMovies({
       });
   }, []);
 
-  function handleAddButton() {
-    const innerWidth = window.innerWidth;
-    if (innerWidth <= MOVIE_SCREEN_MOBILE) {
-      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
-    } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
-      setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
-    } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
-      setAddMovieButton(addMoviesButton + MOVIE_ADD_THREE);
-    }
-    setIsActiveButton(savedMovies.length >= addMoviesButton);
+
+  function addMovies(query) {
+    setIsCardsLoading(true);
+    moviesApi.getInfo().then((movieResult) => {
+      const resultMoviesFilter = moviesFilter(query, movieResult);
+      setCardList(resultMoviesFilter);
+      setToLocalStorage('mineMovies', resultMoviesFilter);
+      setToLocalStorage('querySearch', query);
+      setIsCardsLoading(false);
+    });
+  }
+
+  function moviesFilter(query, cardList) {
+    const filteredList = cardList.filter((movie) => {
+      return movie.nameRU.toLowerCase().includes(query.toLowerCase());
+    });
+    return filteredList;
   }
 
   return (
     <>
       <Header loggedIn={loggedIn} />
       <main className='movies'>
-        <SearchForm movieFilter={movieFilter} setMovieFilter={setMovieFilter} />
+        <SearchForm addMovies={addMovies} movieFilter={movieFilter} setMovieFilter={setMovieFilter} />
         <MoviesCardList
-          addMoviesButton={addMoviesButton}
           movies={savedMovies}
-          setAddMovieButton={setAddMovieButton}
           onCardDelete={onCardDelete}
           movieFilter={movieFilter}
         />
-        {!isActiveButton && (
-          <button className='movies__button' onClick={handleAddButton}>
-            Ещё
-          </button>
-        )}
         <SavedDevider />
       </main>
       <Footer />

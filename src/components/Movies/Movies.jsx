@@ -40,9 +40,19 @@ function Movies({
       setAddMovieButton(addMoviesButton + MOVIE_ADD_TWO);
     } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
       setAddMovieButton(addMoviesButton + MOVIE_ADD_THREE);
+    } else {
+      setAddMovieButton(addMoviesButton + MOVIE_ADD_THREE);
     }
     setIsActiveButton(cardList.length === addMoviesButton);
   }
+
+  React.useEffect(() => {
+    handleAddButton(); 
+    window.addEventListener('resize', handleAddButton);
+    return () => {
+      window.removeEventListener('resize', handleAddButton);
+    };
+  }, []);
 
   function addMovies(query) {
     setIsCardsLoading(true);
@@ -84,6 +94,8 @@ function Movies({
           handleDeleteCard={handleDeleteCard}
           movieFilter={movieFilter}
           isCardsLoading={isCardsLoading}
+          isActiveButton={isActiveButton}
+          handleAddButton={handleAddButton}
         />
         {isFind && (
           <span className='movies__no-movies'>«Ничего не найдено»</span>

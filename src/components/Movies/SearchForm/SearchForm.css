@@ -71,9 +71,7 @@
 .search__span {
   color: #FF004C;
   font-size: 11px;
-  position: absolute;
   top: 205px;
-  left: 73px;
 }
 
 @media screen and (max-width: 950px) {
@@ -83,7 +81,6 @@
 
   .search__span {
     top: 205px;
-    left: 32px;
   }
 }
 
@@ -109,6 +106,5 @@
 
   .search__span {
     top: 201px;
-    left: 16px;
   }
 }
