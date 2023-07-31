@@ -40,7 +40,7 @@ function Register({ onRegister, loggedIn, onLoading }) {
             maxLength='40'
             id='name'
             required
-            placeholder='Надежда'
+            placeholder='Введите ваше имя'
             onChange={handleChange}
             value={values.name || ''}
             autoComplete='off'

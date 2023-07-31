@@ -4,7 +4,14 @@ import Header from '../Header/Header';
 import useForm from '../../hooks/useForm';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ loggedIn, updateUser, logout, success, errorApi }) {
+function Profile({
+  loggedIn,
+  updateUser,
+  logout,
+  success,
+  errorApi,
+  isLoading,
+}) {
   const { values, valid, handleChange, error, setValues, setValid } = useForm();
   const currentUser = React.useContext(CurrentUserContext);
   const [errorMessage, setErrorMessage] = React.useState(false);
@@ -90,7 +97,8 @@ function Profile({ loggedIn, updateUser, logout, success, errorApi }) {
                 disabled={
                   !valid ||
                   (values.name === currentUser.name &&
-                    values.email === currentUser.email)
+                    values.email === currentUser.email) ||
+                  isLoading
                 }
               >
                 Сохранить

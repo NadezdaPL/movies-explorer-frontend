@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute';
 import { mainApi } from '../../utils/MainApi';
@@ -15,35 +15,40 @@ import Register from '../Register/Register';
 import NotFound from '../NotFound/NotFound';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 function App() {
   const [currentUser, setCurrentUser] = React.useState({});
-  const [loggedIn, setLoggedIn] = React.useState(
-    false || getFromLocalStorage('jwt')
-  );
+  const [loggedIn, setLoggedIn] = React.useState(false);
   const [savedCards, setSavedCards] = React.useState(
     getFromLocalStorage('savedCards') || []
   );
-  const navigate = useNavigate();
-
+  const [filteredSavedMovies, setFilteredSavedMovies] = React.useState([]);
+  const [isNotifyPopupOpen, setIsNotifyPopupOpen] = React.useState(false);
+  const [statusMessage, setStatusMessage] = React.useState(true);
   const [success, setSuccess] = React.useState(false);
   const [cardList, setCardList] = React.useState(
     getFromLocalStorage('mineMovies') || []
   );
   const [isCardsLoading, setIsCardsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [movieFilter, setMovieFilter] = React.useState(
     false || getFromLocalStorage('checkedButton')
   );
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const currentUrl = location.pathname;
 
   React.useEffect(() => {
     const jwt = getFromLocalStorage('jwt');
     if (jwt) {
       setIsCardsLoading(true);
-      setLoggedIn(true);
       auth
         .checkToken(jwt)
-        .then(() => {
+        .then((data) => {
           setLoggedIn(true);
+          navigate(currentUrl, { replace: true });
         })
         .catch((e) => {
           console.error(e);
@@ -79,6 +84,7 @@ function App() {
 
   const handleLogin = ({ email, password }) => {
     setIsCardsLoading(true);
+    setIsLoading(true);
     auth
       .authorize({ email, password })
       .then((data) => {
@@ -91,13 +97,17 @@ function App() {
       .catch((e) => {
         console.error(e);
         setSuccess(false);
+        setIsNotifyPopupOpen(true);
+        setStatusMessage('Ошибка авторизации');
       })
       .finally(() => {
         setIsCardsLoading(false);
+        setIsLoading(false);
       });
   };
 
   const handleRegistration = ({ name, email, password }) => {
+    setIsLoading(true);
     auth
       .register(name, email, password)
       .then(() => {
@@ -106,20 +116,33 @@ function App() {
       .catch((e) => {
         console.error(e);
         setSuccess(false);
+        setIsNotifyPopupOpen(true);
+        setStatusMessage('Ошибка регистрации');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
   const handleUpdateUser = (data) => {
     const jwt = getFromLocalStorage('jwt');
+    setIsLoading(true);
     mainApi
       .editUser(data, jwt)
       .then(() => {
         setCurrentUser({ currentUser, name: data.name, email: data.email });
         setSuccess(true);
+        setIsNotifyPopupOpen(true);
+        setStatusMessage('Данные успешно изменены');
       })
       .catch((error) => {
         console.log(error);
         setSuccess(false);
+        setIsNotifyPopupOpen(true);
+        setStatusMessage('Ошибка при сохранении данных');
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -129,6 +152,7 @@ function App() {
       .savedCard(data, jwt)
       .then((response) => {
         setSavedCards([...savedCards, response]);
+        setToLocalStorage('mineSavedMovies', [...savedCards, response]);
       })
       .catch((error) => {
         console.log(error);
@@ -144,17 +168,15 @@ function App() {
 
   const handleDeleteCard = (id) => {
     const jwt = getFromLocalStorage('jwt');
-    const searchCard = getFromLocalStorage('mineSavedMovies');
     mainApi
       .deleteCard(id, jwt)
       .then(() => {
         const updateCardList = savedCards.filter((card) => card._id !== id);
         setSavedCards(updateCardList);
-        if (searchCard) {
-          const updateSeach = searchCard.filter((card) => card._id !== id);
-
-          setToLocalStorage('searchMovies', updateSeach);
-        }
+        setFilteredSavedMovies(
+          filteredSavedMovies.filter((card) => card._id !== id)
+        );
+        setToLocalStorage('mineSavedMovies', updateCardList);
       })
       .catch((error) => {
         console.log(error);
@@ -190,6 +212,8 @@ function App() {
                 setMovieFilter={setMovieFilter}
                 isCardsLoading={isCardsLoading}
                 setIsCardsLoading={setIsCardsLoading}
+                setIsLoading={setIsLoading}
+                isLoading={isLoading}
               ></ProtectedRoute>
             }
           />
@@ -207,6 +231,9 @@ function App() {
                 setMovieFilter={setMovieFilter}
                 isCardsLoading={isCardsLoading}
                 setIsCardsLoading={setIsCardsLoading}
+                filteredMovies={filteredSavedMovies}
+                setFilteredMovies={setFilteredSavedMovies}
+                isLoading={isLoading}
               ></ProtectedRoute>
             }
           />
@@ -229,11 +256,18 @@ function App() {
                 updateUser={handleUpdateUser}
                 success={success}
                 logout={handleLogout}
+                isLoading={isLoading}
               />
             }
           />
           <Route path='*' element={<NotFound />} />
         </Routes>
+        <InfoTooltip
+          name='notify'
+          isOpen={isNotifyPopupOpen}
+          setPopupOpened={setIsNotifyPopupOpen}
+          statusMessage={statusMessage}
+        />
       </CurrentUserContext.Provider>
     </div>
   );

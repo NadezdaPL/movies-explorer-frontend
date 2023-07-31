@@ -1,16 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import {
-  MOVIE_SCREEN_EIGHT,
-  MOVIE_SCREEN_FIVE,
-  MOVIE_SCREEN_LARGE,
-  MOVIE_SCREEN_MEDIUM,
-  MOVIE_SCREEN_MOBILE,
-  MOVIE_SCREEN_TWELVE,
-  MOVIE_SHORT,
-} from '../../../utils/constants';
+import { MOVIE_SHORT } from '../../../utils/constants';
 import Preloader from '../../Preloader/Preloader';
+import { qtyCards } from '../../../utils/helpers';
 
 function MoviesCardList({
   movies,
@@ -22,36 +15,45 @@ function MoviesCardList({
   handleDeleteCard,
   movieFilter,
   isCardsLoading,
+  onClickAddButton,
 }) {
+  const [viewedMovies, setViewedMovies] = useState([]);
+  const [viewedFilteredMoviesQty, setViewedFilteredMoviesQty] = useState(0);
   React.useEffect(() => {
-    const innerWidth = window.innerWidth;
-    if (innerWidth <= MOVIE_SCREEN_MOBILE) {
-      setAddMovieButton(MOVIE_SCREEN_FIVE);
-    } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
-      setAddMovieButton(MOVIE_SCREEN_EIGHT);
-    } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
-      setAddMovieButton(MOVIE_SCREEN_TWELVE);
-    } else if (innerWidth > MOVIE_SCREEN_LARGE) {
-      setAddMovieButton(MOVIE_SCREEN_TWELVE);
-    }
+    setAddMovieButton(qtyCards());
 
-    const handleSize = (e) => {
-      if (e.target.innerWidth <= MOVIE_SCREEN_MOBILE) {
-        setAddMovieButton(MOVIE_SCREEN_FIVE);
-      } else if (e.target.innerWidth <= MOVIE_SCREEN_MEDIUM) {
-        setAddMovieButton(MOVIE_SCREEN_EIGHT);
-      } else if (e.target.innerWidth <= MOVIE_SCREEN_LARGE) {
-        setAddMovieButton(MOVIE_SCREEN_TWELVE);
-      } else {
-        setAddMovieButton(MOVIE_SCREEN_TWELVE);
-      }
+    const handleSize = () => {
+      setAddMovieButton(qtyCards());
     };
-
+    handleSize();
     window.addEventListener('resize', handleSize);
     return () => {
       window.removeEventListener('resize', handleSize);
     };
   }, []);
+  React.useEffect(() => {
+    setAddMovieButton(qtyCards());
+  }, [movieFilter]);
+
+  React.useEffect(() => {
+    const viewedMoviesNewArr = movieFilter
+      ? movies
+          .filter((movie) => {
+            return movie.duration < MOVIE_SHORT;
+          })
+          .slice(0, addMoviesButton)
+      : movies.slice(0, addMoviesButton);
+    setViewedMovies(viewedMoviesNewArr);
+  }, [movies, movieFilter, addMoviesButton]);
+
+  React.useEffect(() => {
+    const allFilteredCardsQty = movieFilter
+      ? movies.filter((movie) => {
+          return movie.duration < MOVIE_SHORT;
+        }).length
+      : movies.length;
+    setViewedFilteredMoviesQty(allFilteredCardsQty);
+  }, [movies, movieFilter, addMoviesButton]);
 
   return (
     <>
@@ -60,33 +62,24 @@ function MoviesCardList({
       ) : (
         <section className='cardlist'>
           <ul className='cardlist__list'>
-            {movieFilter
-              ? movies
-                  .filter((movie) => {
-                    return movie.duration < MOVIE_SHORT;
-                  })
-                  .slice(0)
-                  .map((movie) => (
-                      <MoviesCard
-                        movie={movie}
-                        movies={movies}
-                        onCardSave={onCardSave}
-                        savedCards={savedCards}
-                        handleDeleteCard={handleDeleteCard}
-                        key={movie.id}
-                      />
-                  ))
-              : movies.slice(0, addMoviesButton).map((movie) => (
-                    <MoviesCard
-                      movie={movie}
-                      movies={movies}
-                      onCardSave={onCardSave}
-                      savedCards={savedCards}
-                      handleDeleteCard={handleDeleteCard}
-                      key={movie.id}
-                    />
-                ))}
+            {viewedMovies.map((movie) => (
+              <MoviesCard
+                movie={movie}
+                movies={movies}
+                onCardSave={onCardSave}
+                savedCards={savedCards}
+                handleDeleteCard={handleDeleteCard}
+                key={movie.id}
+              />
+            ))}
           </ul>
+          {viewedFilteredMoviesQty > addMoviesButton ? (
+            <button className='movies__button' onClick={onClickAddButton}>
+              Ещё
+            </button>
+          ) : (
+            ''
+          )}
         </section>
       )}
     </>

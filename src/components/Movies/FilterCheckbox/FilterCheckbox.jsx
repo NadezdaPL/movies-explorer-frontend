@@ -5,7 +5,7 @@ import { setToLocalStorage } from '../../../utils/helpers';
 function FilterCheckbox({ movieFilter, setMovieFilter }) {
   function handleButtonClick(e) {
     setMovieFilter(e.target.checked);
-    setToLocalStorage('checkedButton', e.target.checked)
+    setToLocalStorage('checkedButton', e.target.checked);
   }
 
   return (

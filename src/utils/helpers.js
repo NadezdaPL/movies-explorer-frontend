@@ -1,3 +1,14 @@
+import {
+  MOVIE_ADD_THREE,
+  MOVIE_ADD_TWO,
+  MOVIE_SCREEN_EIGHT,
+  MOVIE_SCREEN_FIVE,
+  MOVIE_SCREEN_LARGE,
+  MOVIE_SCREEN_MEDIUM,
+  MOVIE_SCREEN_MOBILE,
+  MOVIE_SCREEN_TWELVE,
+} from './constants';
+
 export function converter(item) {
   const minute = item % 60;
   const hour = (item - minute) / 60;
@@ -36,3 +47,28 @@ export function isValidEmail(email) {
   return emailPattern.test(email);
 }
 
+export function qtyCards() {
+  const innerWidth = window.innerWidth;
+  if (innerWidth <= MOVIE_SCREEN_MOBILE) {
+    return MOVIE_SCREEN_FIVE;
+  } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
+    return MOVIE_SCREEN_EIGHT;
+  } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
+    return MOVIE_SCREEN_TWELVE;
+  } else if (innerWidth > MOVIE_SCREEN_LARGE) {
+    return MOVIE_SCREEN_TWELVE;
+  }
+}
+
+export function qtyAddCards() {
+  const innerWidth = window.innerWidth;
+  if (innerWidth <= MOVIE_SCREEN_MOBILE) {
+    return MOVIE_ADD_TWO;
+  } else if (innerWidth <= MOVIE_SCREEN_MEDIUM) {
+    return MOVIE_ADD_TWO;
+  } else if (innerWidth <= MOVIE_SCREEN_LARGE) {
+    return MOVIE_ADD_TWO;
+  } else {
+    return MOVIE_ADD_THREE;
+  }
+}

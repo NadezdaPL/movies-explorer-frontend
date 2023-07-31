@@ -3,7 +3,6 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useForm from '../../../hooks/useForm';
 
-
 function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
   const { values, handleChange, setValid } = useForm();
   const [isSpan, setIsSpan] = React.useState(false);

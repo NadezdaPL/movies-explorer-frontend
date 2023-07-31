@@ -4,7 +4,7 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useForm from '../../../hooks/useForm';
 import { getFromLocalStorage } from '../../../utils/helpers';
 
-function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
+function SearchForm({ addMovies, movieFilter, setMovieFilter, isLoading }) {
   const { values, handleChange, setValues, setValid } = useForm();
   const [isSpan, setIsSpan] = React.useState(false);
 
@@ -41,6 +41,7 @@ function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
           type='submit'
           className='search__button-form'
           onClick={handleSubmit}
+          disabled={isLoading}
         >
           Найти
         </button>
