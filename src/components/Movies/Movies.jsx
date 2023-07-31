@@ -54,6 +54,7 @@ function Movies({
     setCardList(mineMovies);
     setToLocalStorage('querySearch', query);
     setToLocalStorage('mineMovies', mineMovies);
+    resultMoviesFilter.length === 0 ? setIsFind(true) : setIsFind(false);
     setIsCardsLoading(false);
   }
 
