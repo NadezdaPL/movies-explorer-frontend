@@ -4,6 +4,9 @@
 }
 
 .movies__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: #2f2f2f;
   border-radius: 6px;
   font-weight: 500;
@@ -21,6 +24,10 @@
 
 .movies__button:hover {
   opacity: 0.8;
+}
+
+.movies__no-movies {
+  text-align: center;
 }
 
 @media screen and (max-width: 950px) {

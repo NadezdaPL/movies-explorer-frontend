@@ -68,14 +68,25 @@
 }
 
 .profile__error_active {
-  position: absolute;
   min-width: 410px;
   box-sizing: border-box;
   font-weight: 400;
   font-size: 11px;
   line-height: 13px;
   color: #ff004c;
+  text-align: center;
   padding-top: 270px;
+}
+
+.profile__success {
+  position: absolute;
+  min-width: 410px;
+  box-sizing: border-box;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  color: #c2c2c2;
+  padding-top: 230px;
   text-align: center;
 }
 

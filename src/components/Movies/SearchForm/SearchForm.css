@@ -46,12 +46,6 @@
   opacity: 0.8;
 }
 
-.search__button-form:disabled {
-  color: #c2c2c2;
-  background: #f8f8f8;
-  cursor: not-allowed;
-}
-
 .search__button-form:disabled:hover {
   opacity: 1;
 }
@@ -74,9 +68,19 @@
   line-height: 18px;
 }
 
+.search__span {
+  color: #FF004C;
+  font-size: 11px;
+  top: 205px;
+}
+
 @media screen and (max-width: 950px) {
   .search {
     padding: 80px 30px 10px;
+  }
+
+  .search__span {
+    top: 205px;
   }
 }
 
@@ -98,5 +102,9 @@
 
   .search__span-checkbox {
     font-size: 11px;
+  }
+
+  .search__span {
+    top: 201px;
   }
 }

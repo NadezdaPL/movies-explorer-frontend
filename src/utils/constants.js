@@ -1,0 +1,10 @@
+export const BEATFILM = 'https://api.nomoreparties.co';
+export const MOVIE_SHORT = 40;
+export const MOVIE_SCREEN_LARGE = 1280;
+export const MOVIE_SCREEN_MEDIUM = 950;
+export const MOVIE_SCREEN_MOBILE = 500;
+export const MOVIE_SCREEN_FIVE = 5;
+export const MOVIE_SCREEN_EIGHT = 8;
+export const MOVIE_SCREEN_TWELVE = 12;
+export const MOVIE_ADD_TWO = 2;
+export const MOVIE_ADD_THREE = 3;

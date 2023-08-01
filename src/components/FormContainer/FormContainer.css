@@ -51,17 +51,21 @@
   opacity: 0.8;
 }
 
-.form-container__button:disabled {
+.form-container__button_disabled {
   color: #c2c2c2;
   background: #f8f8f8;
   cursor: not-allowed;
 }
 
-.form-container__button:disabled:hover {
+.form-container__button_disabled:hover {
   opacity: 1;
 }
 
 .form-container__button_login {
+  margin-top: 221px;
+}
+
+.form-container__button_login_disabled {
   margin-top: 221px;
 }
 
@@ -141,7 +145,7 @@
   border: none;
   font-weight: 400;
   font-size: 14px;
-  line-height: 17px;
+  /* line-height: 17px; */
   background: #202020;
   padding: 5px 0 0;
   color: #ee3465;
@@ -152,17 +156,18 @@
 
 .form__error {
   position: absolute;
-  display: none;
+  display: block;
   box-sizing: border-box;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
   color: #ee3465;
-  top: 51px;
+  opacity: 0;
+  top: 46px;
 }
 
 .form__error_visible {
-  display: block;
+  opacity: 1;
 }
 
 @media screen and (max-width: 950px) {

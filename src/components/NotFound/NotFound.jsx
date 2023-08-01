@@ -13,7 +13,7 @@ function NotFound() {
         <button
           type='button'
           className='not-found__button'
-          onClick={() => navigate('/')}
+          onClick={() => navigate(-1)}
         >
           Назад
         </button>

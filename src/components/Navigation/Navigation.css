@@ -1,6 +1,6 @@
 .navigation {
   display: flex;
-  gap: 363px;
+  gap: 364px;
 }
 
 .navigation__container {
@@ -45,10 +45,11 @@
   display: none;
 }
 
-.navigation__content {
+.navigation__container {
   display: flex;
   justify-content: center;
   gap: 17px;
+  align-items: center;
 }
 
 .navigation__link {

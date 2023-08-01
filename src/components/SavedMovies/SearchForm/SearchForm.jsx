@@ -2,14 +2,12 @@ import React, { useEffect } from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 import useForm from '../../../hooks/useForm';
-import { getFromLocalStorage } from '../../../utils/helpers';
 
-function SearchForm({ addMovies, movieFilter, setMovieFilter, isLoading }) {
-  const { values, handleChange, setValues, setValid } = useForm();
+function SearchForm({ addMovies, movieFilter, setMovieFilter }) {
+  const { values, handleChange, setValid } = useForm();
   const [isSpan, setIsSpan] = React.useState(false);
 
   useEffect(() => {
-    setValues({ name: getFromLocalStorage('querySearch') });
     if (values.name) {
       setValid(true);
     }
@@ -41,7 +39,6 @@ function SearchForm({ addMovies, movieFilter, setMovieFilter, isLoading }) {
           type='submit'
           className='search__button-form'
           onClick={handleSubmit}
-          disabled={isLoading}
         >
           Найти
         </button>

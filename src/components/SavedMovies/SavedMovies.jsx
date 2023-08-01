@@ -1,32 +1,65 @@
 import React from 'react';
 import './SavedMovies.css';
 import Header from '../Header/Header';
-import SearchForm from '../Movies/SearchForm/SearchForm';
-import MoviesCardList from './MoviesCardList/MoviesCardList';
-import { items } from '../../utils/movies.js';
-import Preloader from '../Preloader/Preloader';
+import SearchForm from './SearchForm/SearchForm';
+import MoviesCardList from './MoviesCardList/MoviesCardList.jsx';
 import Footer from '../Footer/Footer';
 import SavedDevider from './SavedDevider/SavedDevider';
+import { getFromLocalStorage } from '../../utils/helpers';
+import { mainApi } from '../../utils/MainApi';
 
-function SavedMovies() {
-  // useState проверить лоудер
-  const [isLoading, setIsLoading] = React.useState(false);
-  console.log(setIsLoading);
+function SavedMovies({
+  loggedIn,
+  onCardDelete,
+  setIsCardsLoading,
+  filteredMovies,
+  setFilteredMovies,
+}) {
+  const [movieFilter, setMovieFilter] = React.useState(false);
+
+  async function addMovies(query) {
+    setIsCardsLoading(true);
+    let mineSavedMovies = getFromLocalStorage('mineSavedMovies');
+    if (!mineSavedMovies) {
+      const jwt = getFromLocalStorage('jwt');
+      mineSavedMovies = await mainApi.getSavedCard(jwt);
+    }
+    const resultMoviesFilter = moviesFilter(query, mineSavedMovies);
+    setFilteredMovies(resultMoviesFilter.reverse());
+    setIsCardsLoading(false);
+  }
+
+  React.useEffect(() => {
+    addMovies('');
+  }, []);
+
+  function moviesFilter(query, cardList) {
+    const filteredList = cardList?.length
+      ? cardList.filter((movie) => {
+          return movie.nameRU.toLowerCase().includes(query.toLowerCase());
+        })
+      : [];
+    return filteredList;
+  }
 
   return (
-    <main className='movies'>
-      {isLoading ? (
-        <Preloader />
-      ) : (
-        <>
-          <Header />
-          <SearchForm />
-          <MoviesCardList movies={items} />
-          <SavedDevider />
-          <Footer />
-        </>
-      )}
-    </main>
+    <>
+      <Header loggedIn={loggedIn} />
+      <main className='movies'>
+        <SearchForm
+          addMovies={addMovies}
+          movieFilter={movieFilter}
+          setMovieFilter={setMovieFilter}
+        />
+        <MoviesCardList
+          movies={filteredMovies}
+          onCardDelete={onCardDelete}
+          movieFilter={movieFilter}
+        />
+        <SavedDevider />
+      </main>
+      <Footer />
+    </>
   );
 }
 

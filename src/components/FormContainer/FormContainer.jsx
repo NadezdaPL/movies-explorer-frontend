@@ -3,11 +3,18 @@ import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../images/logo.svg';
 import React from 'react';
 
-function FormContainer({ title, name, onSubmit, buttonText, ...props }) {
+function FormContainer({
+  title,
+  name,
+  onSubmit,
+  buttonText,
+  isDisable,
+  valid,
+  isName,
+  isPassword,
+  ...props
+}) {
   const navigate = useNavigate();
-  // useState для проверки ошибки и неактивной кнопки
-  const [buttonDisabled, setButtonDisabled] = React.useState(false);
-  console.log(setButtonDisabled);
 
   return (
     <section className='form-container'>
@@ -25,8 +32,12 @@ function FormContainer({ title, name, onSubmit, buttonText, ...props }) {
         <button
           type='submit'
           form={`${name}`}
-          disabled={buttonDisabled ? true : false}
-          className={`form-container__button form-container__button_${name}`}
+          disabled={isDisable ? true : false}
+          className={
+            isDisable
+              ? `form-container__button form-container__button_disabled form-container__button_${name}_disabled`
+              : `form-container__button form-container__button_${name}`
+          }
         >
           {buttonText}
         </button>

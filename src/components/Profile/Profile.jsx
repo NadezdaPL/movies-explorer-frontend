@@ -1,30 +1,53 @@
 import React from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
-import { useNavigate } from 'react-router-dom';
 import useForm from '../../hooks/useForm';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile() {
-  //profile__title, placeholder в PixelPerfect отличается, если заменить
-  // на имя Виталий, все будет совпадать
-  const { values, valid, handleChange, error } = useForm();
-  const [edit, setEdit] = React.useState(false);
-  const navigate = useNavigate();
+function Profile({
+  loggedIn,
+  updateUser,
+  logout,
+  success,
+  errorApi,
+  isLoading,
+}) {
+  const { values, valid, handleChange, error, setValues, setValid } = useForm();
+  const currentUser = React.useContext(CurrentUserContext);
+  const [errorMessage, setErrorMessage] = React.useState(false);
+  const [successMessage, setSuccessMessage] = React.useState(false);
+
+  React.useEffect(() => {
+    if (currentUser) {
+      setValues(currentUser);
+      setValid(true);
+    }
+  }, [setValid, setValues, currentUser]);
+
+  React.useEffect(() => {
+    if (success) {
+      setErrorMessage(false);
+      setSuccessMessage(true);
+    }
+  }, [success, errorApi]);
 
   function submitForm(e) {
     e.preventDefault();
+    updateUser(values);
   }
 
-  function handleEdit() {
-    setEdit(!edit);
+  function handleEditButton(e) {
+    e.preventDefault();
+    setErrorMessage(true);
+    setSuccessMessage(false);
   }
 
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} />
       <main className='profile'>
         <section className='profile__section'>
-          <h1 className='profile__title'>Привет, Надежда!</h1>
+          <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
           <form className='profile__form' onSubmit={submitForm} name='account'>
             <fieldset className='profile__fieldset profile__fieldset_form'>
               <label className='profile__name' htmlFor='name'>
@@ -43,7 +66,7 @@ function Profile() {
                 placeholder='Надежда'
                 onChange={handleChange}
                 value={values.name || ''}
-                disabled={edit ? false : true}
+                disabled={!errorMessage}
               />
             </fieldset>
             <fieldset className='profile__fieldset profile__fieldset_form'>
@@ -56,60 +79,49 @@ function Profile() {
                 }`}
                 name='email'
                 type='email'
-                minLength='6'
-                maxLength='40'
                 id='email'
                 required
                 placeholder='pochta@yandex.ru'
                 onChange={handleChange}
                 value={values.email || ''}
-                disabled={edit ? false : true}
+                disabled={!errorMessage}
               />
             </fieldset>
-            {/* ниже код для проверки вывода сообщения */}
-            {/* {!valid ? (
-            <>
-              {edit ? (
-                <span id='name-error' className='profile__error_active'>
-                  При обновлении профиля произошла ошибка.
-                </span>
-              ) : (
-                ''
-              )}
-            </>
-          ) : (
-            ''
-          )} */}
-            {edit && (
+            {successMessage && (
+              <span className='profile__success'>Данные успешно изменены</span>
+            )}
+            {errorMessage ? (
               <button
-                className='profile__save-form'
                 type='submit'
-                disabled={valid ? false : true}
+                className='profile__save-form'
+                disabled={
+                  !valid ||
+                  (values.name === currentUser.name &&
+                    values.email === currentUser.email) ||
+                  isLoading
+                }
               >
                 Сохранить
               </button>
+            ) : (
+              <>
+                <button
+                  className='profile__edit-form'
+                  type='button'
+                  onClick={handleEditButton}
+                >
+                  Редактировать
+                </button>
+                <button
+                  type='button'
+                  className='profile__exit-form'
+                  onClick={logout}
+                >
+                  Выйти из аккаунта
+                </button>
+              </>
             )}
           </form>
-          {edit ? (
-            ''
-          ) : (
-            <>
-              <button
-                className='profile__edit-form'
-                type='button'
-                onClick={handleEdit}
-              >
-                Редактировать
-              </button>
-              <button
-                type='button'
-                className='profile__exit-form'
-                onClick={() => navigate('/')}
-              >
-                Выйти из аккаунта
-              </button>
-            </>
-          )}
         </section>
       </main>
     </>

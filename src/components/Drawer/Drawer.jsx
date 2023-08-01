@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import account from '../../images/account.svg';
 
 function Drawer({ onClickClose, opened }) {
-  // для проверки активной ссылки
   const linkActive = 'drawer__link drawer__link_active';
   const link = 'drawer__link';
 

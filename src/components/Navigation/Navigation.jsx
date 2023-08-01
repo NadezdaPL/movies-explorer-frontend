@@ -5,10 +5,9 @@ import account from '../../images/account.svg';
 import Drawer from '../Drawer/Drawer';
 
 function Navigation() {
-  // useState для проверки Drawer и активной ссылки
-  const [opened, setOpened] = React.useState(false);
   const linkActive = 'navigation__link navigation__active-link';
   const link = 'navigation__link';
+  const [opened, setOpened] = React.useState(false);
 
   return (
     <nav className='navigation'>
@@ -20,6 +19,8 @@ function Navigation() {
           >
             Фильмы
           </NavLink>
+        </li>
+        <li className='navigation__content'>
           <NavLink
             className={({ isActive }) => (isActive ? linkActive : link)}
             to='/saved-movies'
@@ -51,7 +52,7 @@ function Navigation() {
           <div className='navigation__line-burger' />
         </div>
         {opened && (
-          <Drawer onClickClose={() => setOpened(false)} />
+          <Drawer opened={opened} onClickClose={() => setOpened(!true)} />
         )}
       </div>
     </nav>
